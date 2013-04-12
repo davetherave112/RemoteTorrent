@@ -23,6 +23,7 @@
 		B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EF171762A500723864 /* RTDetailViewController.m */; };
 		B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3F6171769F300723864 /* bittorrent-logo-purple.png */; };
 		B269D3FB1718578800723864 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3FA1718578800723864 /* icon2.png */; };
+		B2FB013617189011002B17D1 /* RTLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FB013517189011002B17D1 /* RTLoginController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -49,6 +50,8 @@
 		B269D3F6171769F300723864 /* bittorrent-logo-purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bittorrent-logo-purple.png"; sourceTree = "<group>"; };
 		B269D3F81718471B00723864 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		B269D3FA1718578800723864 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		B2FB013417189011002B17D1 /* RTLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLoginController.h; sourceTree = "<group>"; };
+		B2FB013517189011002B17D1 /* RTLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLoginController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 				B269D3F6171769F300723864 /* bittorrent-logo-purple.png */,
 				B269D3EB171762A500723864 /* RTMasterViewController.h */,
 				B269D3EC171762A500723864 /* RTMasterViewController.m */,
+				B2FB013417189011002B17D1 /* RTLoginController.h */,
+				B2FB013517189011002B17D1 /* RTLoginController.m */,
 				B269D3EE171762A500723864 /* RTDetailViewController.h */,
 				B269D3EF171762A500723864 /* RTDetailViewController.m */,
 				B269D3E8171762A500723864 /* RemoteTorrent.xcdatamodeld */,
@@ -201,6 +206,7 @@
 				B269D3EA171762A500723864 /* RemoteTorrent.xcdatamodeld in Sources */,
 				B269D3ED171762A500723864 /* RTMasterViewController.m in Sources */,
 				B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */,
+				B2FB013617189011002B17D1 /* RTLoginController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
