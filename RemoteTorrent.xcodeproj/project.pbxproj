@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B239C46C1718A6D400AE743E /* image.png in Resources */ = {isa = PBXBuildFile; fileRef = B239C46B1718A6D400AE743E /* image.png */; };
 		B269D3CC171762A500723864 /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B269D3CB171762A500723864 /* UIKit.framework */; };
 		B269D3CE171762A500723864 /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B269D3CD171762A500723864 /* Foundation.framework */; };
 		B269D3D0171762A500723864 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B269D3CF171762A500723864 /* CoreGraphics.framework */; };
@@ -22,11 +23,11 @@
 		B269D3ED171762A500723864 /* RTMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EC171762A500723864 /* RTMasterViewController.m */; };
 		B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EF171762A500723864 /* RTDetailViewController.m */; };
 		B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3F6171769F300723864 /* bittorrent-logo-purple.png */; };
-		B269D3FB1718578800723864 /* icon2.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3FA1718578800723864 /* icon2.png */; };
 		B2FB013617189011002B17D1 /* RTLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FB013517189011002B17D1 /* RTLoginController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B239C46B1718A6D400AE743E /* image.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = image.png; sourceTree = "<group>"; };
 		B269D3C8171762A500723864 /* RemoteTorrent.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RemoteTorrent.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B269D3CB171762A500723864 /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		B269D3CD171762A500723864 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
@@ -72,6 +73,7 @@
 		B269D3BF171762A500723864 = {
 			isa = PBXGroup;
 			children = (
+				B239C46B1718A6D400AE743E /* image.png */,
 				B269D3FA1718578800723864 /* icon2.png */,
 				B269D3F81718471B00723864 /* icon.png */,
 				B269D3D3171762A500723864 /* RemoteTorrent */,
@@ -190,7 +192,7 @@
 				B269D3E4171762A500723864 /* Default-568h@2x.png in Resources */,
 				B269D3E7171762A500723864 /* MainStoryboard.storyboard in Resources */,
 				B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */,
-				B269D3FB1718578800723864 /* icon2.png in Resources */,
+				B239C46C1718A6D400AE743E /* image.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
