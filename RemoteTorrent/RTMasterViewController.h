@@ -14,5 +14,12 @@
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
+@property (strong, nonatomic) NSString *ipAddress;
+@property (strong, nonatomic) NSString *port;
+
+
+@property (weak, nonatomic) IBOutlet UITextField *ipAddressField;
+@property (weak, nonatomic) IBOutlet UITextField *portField;
+@property (weak, nonatomic) IBOutlet UISwitch *staySignedOnSwitch;
 
 @end

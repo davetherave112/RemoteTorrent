@@ -14,7 +14,10 @@
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
 @end
 
+
 @implementation RTMasterViewController
+
+NSDictionary* torrentListDictionary;
 
 - (void)awakeFromNib
 {
@@ -25,10 +28,16 @@
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
+    /*
     self.navigationItem.leftBarButtonItem = self.editButtonItem;
 
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
     self.navigationItem.rightBarButtonItem = addButton;
+     */
+    
+    torrentListDictionary = [self getTorrentList];
+    
+    
 }
 
 - (void)didReceiveMemoryWarning
@@ -72,7 +81,7 @@
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"Cell" forIndexPath:indexPath];
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TorrentCell" forIndexPath:indexPath];
     [self configureCell:cell atIndexPath:indexPath];
     return cell;
 }
@@ -80,7 +89,7 @@
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
-    return YES;
+    return NO;
 }
 
 - (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
@@ -217,6 +226,36 @@
 {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
+}
+
+- (NSDictionary*)getTorrentList
+{
+    NSDictionary* resultDictionary;
+    
+    // Formulate BitTorrent API search URL:
+    NSString* searchURL = @"http://[IP]:[PORT]/gui/?list=1";
+    searchURL = [searchURL stringByAppendingString:self.ipAddress];
+    searchURL = [searchURL stringByAppendingString:@":"];
+    searchURL = [searchURL stringByAppendingString:self.port];
+    searchURL = [searchURL stringByAppendingString:@"/gui/?list=1"];
+    
+    
+    // Perform BitTorrent API search:
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData* data = [NSData dataWithContentsOfURL:
+                        [NSURL URLWithString: searchURL]];
+        
+        NSError* error;
+        
+        resultDictionary = [NSJSONSerialization JSONObjectWithData:data
+                                                           options:kNilOptions
+                                                             error:&error];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            //[self processTorrentResults];
+            return resultDictionary;
+        });
+    });
 }
 
 @end
