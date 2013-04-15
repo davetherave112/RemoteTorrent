@@ -17,6 +17,7 @@
 
 @implementation RTMasterViewController
 
+NSDictionary* resultDictionary;
 NSDictionary* torrentListDictionary;
 
 - (void)awakeFromNib
@@ -230,14 +231,47 @@ NSDictionary* torrentListDictionary;
 
 - (NSDictionary*)getTorrentList
 {
-    NSDictionary* resultDictionary;
+    //NSDictionary* resultDictionary;
+    
+    
+    self.ipAddress = @"108.29.127.70";
+    self.port = @"18921";
+    
+    
+    // Get token
+    NSString* baseURLString = @"http://";
+    baseURLString = [baseURLString stringByAppendingString:self.ipAddress];
+    baseURLString = [baseURLString stringByAppendingString:@":"];
+    baseURLString = [baseURLString stringByAppendingString:self.port];
+    baseURLString = [baseURLString stringByAppendingString:@"/gui/"];
+    
+    NSString* tokenURLString = [baseURLString stringByAppendingString:@"token.html"];
+    
+    
+    
+    
+    NSURL *tokenURL = [NSURL URLWithString:tokenURLString];
+    NSError *error;
+    NSString *tokenPage = [NSString stringWithContentsOfURL:tokenURL
+                                                    encoding:NSASCIIStringEncoding
+                                                       error:&error];
+    
+
+    NSString* token;
+    //token = [tokenPage stringByStrippingTags];
+    
+    NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
+    
+    
+
+    [tokenScanner scanUpToString:@"display:none;'>" intoString:NULL];
+    [tokenScanner scanUpToString:@"</div>" intoString:&token];
+    
     
     // Formulate BitTorrent API search URL:
-    NSString* searchURL = @"http://[IP]:[PORT]/gui/?list=1";
-    searchURL = [searchURL stringByAppendingString:self.ipAddress];
-    searchURL = [searchURL stringByAppendingString:@":"];
-    searchURL = [searchURL stringByAppendingString:self.port];
-    searchURL = [searchURL stringByAppendingString:@"/gui/?list=1"];
+    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token="];
+    searchURL = [searchURL stringByAppendingString:token];
+
     
     
     // Perform BitTorrent API search:
@@ -253,7 +287,7 @@ NSDictionary* torrentListDictionary;
         
         dispatch_async(dispatch_get_main_queue(), ^{
             //[self processTorrentResults];
-            return resultDictionary;
+            //return resultDictionary;
         });
     });
 }

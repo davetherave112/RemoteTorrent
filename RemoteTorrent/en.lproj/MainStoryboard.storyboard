@@ -7,16 +7,16 @@
         <!--Navigation Controller-->
         <scene sceneID="11">
             <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
                 <navigationController id="3" sceneMemberID="viewController">
                     <navigationBar key="navigationBar" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="4">
                         <autoresizingMask key="autoresizingMask"/>
                         <color key="tintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="iRa-9O-Xl1" kind="relationship" relationship="rootViewController" id="ALt-g2-TXy"/>
+                        <segue destination="12" kind="relationship" relationship="rootViewController" id="uPS-rO-P6g"/>
                     </connections>
                 </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-398" y="108"/>
         </scene>
@@ -25,7 +25,7 @@
             <objects>
                 <viewController id="iRa-9O-Xl1" customClass="RTLoginController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E6O-mv-tW8">
-                        <rect key="frame" x="0.0" y="64" width="320" height="416"/>
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <subviews>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Port" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4FI-gP-I7x">
@@ -54,7 +54,6 @@
                                 </state>
                                 <connections>
                                     <action selector="logInPressed:" destination="iRa-9O-Xl1" eventType="touchUpInside" id="bad-h9-8q6"/>
-                                    <segue destination="12" kind="push" id="f9K-YR-NVw"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bittorrent-logo-purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-He-vbr">
@@ -75,15 +74,15 @@
                             <constraint firstItem="4FI-gP-I7x" firstAttribute="leading" secondItem="Ua0-n6-bHV" secondAttribute="leading" type="default" id="0HM-IB-rAf"/>
                             <constraint firstItem="Ua0-n6-bHV" firstAttribute="trailing" secondItem="4FI-gP-I7x" secondAttribute="trailing" type="default" id="7gL-GX-bsG"/>
                             <constraint firstItem="ZEJ-hy-RNb" firstAttribute="leading" secondItem="4FI-gP-I7x" secondAttribute="leading" type="default" id="BYm-W5-OMG"/>
-                            <constraint firstItem="Ua0-n6-bHV" firstAttribute="centerX" secondItem="E6O-mv-tW8" secondAttribute="centerX" type="default" id="CGu-WK-WEU"/>
+                            <constraint firstItem="WI0-He-vbr" firstAttribute="centerX" secondItem="E6O-mv-tW8" secondAttribute="centerX" type="default" id="CiG-JZ-RmY"/>
                             <constraint firstItem="WI0-He-vbr" firstAttribute="top" secondItem="E6O-mv-tW8" secondAttribute="top" constant="20" symbolic="YES" type="default" id="E8F-eq-q9Y"/>
                             <constraint firstAttribute="bottom" secondItem="Ua0-n6-bHV" secondAttribute="bottom" constant="65" id="FHo-t0-1vV"/>
+                            <constraint firstItem="4Hy-qP-qxH" firstAttribute="leading" secondItem="E6O-mv-tW8" secondAttribute="leading" constant="69" id="PZ5-wA-NMk"/>
                             <constraint firstItem="Ua0-n6-bHV" firstAttribute="top" secondItem="9ue-j1-jp1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PoL-PN-Qkw"/>
                             <constraint firstItem="9ue-j1-jp1" firstAttribute="top" secondItem="4FI-gP-I7x" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="URh-hM-g55"/>
-                            <constraint firstItem="4Hy-qP-qxH" firstAttribute="leading" secondItem="E6O-mv-tW8" secondAttribute="leading" constant="53" id="WBQ-ec-XFd"/>
                             <constraint firstItem="WI0-He-vbr" firstAttribute="centerX" secondItem="ZEJ-hy-RNb" secondAttribute="centerX" type="default" id="aqK-qu-a7p"/>
                             <constraint firstItem="4Hy-qP-qxH" firstAttribute="centerY" secondItem="9ue-j1-jp1" secondAttribute="centerY" type="default" id="hZb-Vy-31v"/>
-                            <constraint firstItem="9ue-j1-jp1" firstAttribute="trailing" secondItem="WI0-He-vbr" secondAttribute="trailing" type="default" id="uLA-9t-Exn"/>
+                            <constraint firstItem="9ue-j1-jp1" firstAttribute="leading" secondItem="4Hy-qP-qxH" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="nG3-jD-Yv0"/>
                             <constraint firstItem="ZEJ-hy-RNb" firstAttribute="trailing" secondItem="4FI-gP-I7x" secondAttribute="trailing" type="default" id="xiJ-M7-IPM"/>
                             <constraint firstItem="ZEJ-hy-RNb" firstAttribute="top" secondItem="E6O-mv-tW8" secondAttribute="top" constant="181" id="xlo-og-TYV"/>
                         </constraints>
@@ -98,7 +97,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="PCh-di-HLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="38" y="108"/>
+            <point key="canvasLocation" x="34" y="427"/>
         </scene>
         <!--Master View Controller - Master-->
         <scene sceneID="18">
