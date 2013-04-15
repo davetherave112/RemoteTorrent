@@ -19,6 +19,7 @@
 
 NSDictionary* resultDictionary;
 NSDictionary* torrentListDictionary;
+NSArray* torrentListArray;
 
 - (void)awakeFromNib
 {
@@ -71,20 +72,47 @@ NSDictionary* torrentListDictionary;
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView
 {
-    return [[self.fetchedResultsController sections] count];
+    return 1;
+    //return [[self.fetchedResultsController sections] count];
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
+    /*
     id <NSFetchedResultsSectionInfo> sectionInfo = [self.fetchedResultsController sections][section];
     return [sectionInfo numberOfObjects];
+     */
+    
+    return torrentListArray.count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TorrentCell" forIndexPath:indexPath];
-    [self configureCell:cell atIndexPath:indexPath];
+    //UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:@"TorrentCell" forIndexPath:indexPath];
+    //[self configureCell:cell atIndexPath:indexPath];
+   
+    
+    
+    static NSString *CellIdentifier = @"TorrentCell";
+    
+    // Get a cell to use:
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if (cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+	// Configure the cell:
+	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
+    NSNumber *percentDone = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 2
+    NSString *percentDoneString = [NSString stringWithFormat:@"%@", percentDone];
+
+    
+	cell.textLabel.text = title;
+    cell.detailTextLabel.text = percentDoneString;
+	
     return cell;
+    
+    
 }
 
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
@@ -247,8 +275,7 @@ NSDictionary* torrentListDictionary;
     
     NSString* tokenURLString = [baseURLString stringByAppendingString:@"token.html"];
     
-    
-    
+    //tokenURLString = @"https://www.google.com/";    
     
     NSURL *tokenURL = [NSURL URLWithString:tokenURLString];
     NSError *error;
@@ -286,10 +313,18 @@ NSDictionary* torrentListDictionary;
                                                              error:&error];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            //[self processTorrentResults];
+            [self processTorrentResults];
             //return resultDictionary;
         });
     });
 }
+
+- (void) processTorrentResults
+{
+
+    torrentListArray = [resultDictionary objectForKey:@"torrents"];
+    
+}
+
 
 @end
