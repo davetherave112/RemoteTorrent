@@ -21,6 +21,8 @@ NSDictionary* resultDictionary;
 NSDictionary* torrentListDictionary;
 NSArray* torrentListArray;
 
+NSMutableData* responseData;
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -262,7 +264,8 @@ NSArray* torrentListArray;
     //NSDictionary* resultDictionary;
     
     
-    self.ipAddress = @"108.29.127.70";
+    //self.ipAddress = @"guest@192.168.1.6";
+    self.ipAddress = @"admin:12345@108.29.127.70";
     self.port = @"18921";
     
     
@@ -275,7 +278,7 @@ NSArray* torrentListArray;
     
     NSString* tokenURLString = [baseURLString stringByAppendingString:@"token.html"];
     
-    //tokenURLString = @"https://www.google.com/";    
+    //tokenURLString = @"https://www.google.com/";
     
     NSURL *tokenURL = [NSURL URLWithString:tokenURLString];
     NSError *error;
@@ -287,36 +290,46 @@ NSArray* torrentListArray;
     NSString* token;
     //token = [tokenPage stringByStrippingTags];
     
-    NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
+    //if (!error) {
+        
+        NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
+        [tokenScanner scanUpToString:@"display:none;'>" intoString:NULL];
+        [tokenScanner scanUpToString:@"</div>" intoString:&token];
+    
+    //token = @"Znfv9Q7TfvJsgsX1d-z9nzgsCNlArJhfl-o8bqYzeAx3f9wPCXQTk_A-bVEAAAAA";
+        
+    //}
+    //else {
+        //report error to user
+    //}
     
     
 
-    [tokenScanner scanUpToString:@"display:none;'>" intoString:NULL];
-    [tokenScanner scanUpToString:@"</div>" intoString:&token];
+    // home ip address
+    //108.29.127.70/
     
     
     // Formulate BitTorrent API search URL:
-    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token="];
-    searchURL = [searchURL stringByAppendingString:token];
+    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token=lMtHnFixRFkGXJsbQs9hkH_5RIg9gPElkt5UX8cr2izaHoCpvsbJfqtRbVEAAAAA"];
+    //searchURL = [searchURL stringByAppendingString:token];
 
     
     
     // Perform BitTorrent API search:
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* data = [NSData dataWithContentsOfURL:
-                        [NSURL URLWithString: searchURL]];
+    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSData* responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString: searchURL]];
+        NSError* error2;
+    
+	//NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+    
+    
+    resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
         
-        NSError* error;
-        
-        resultDictionary = [NSJSONSerialization JSONObjectWithData:data
-                                                           options:kNilOptions
-                                                             error:&error];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
+        //dispatch_async(dispatch_get_main_queue(), ^{
             [self processTorrentResults];
             //return resultDictionary;
-        });
-    });
+        //});
+    //});
 }
 
 - (void) processTorrentResults
