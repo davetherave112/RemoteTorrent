@@ -105,11 +105,18 @@ NSMutableData* responseData;
     
 	// Configure the cell:
 	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
-    NSNumber *percentDone = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
-    NSString *percentDoneString = [NSString stringWithFormat:@"%@", percentDone];
+    NSString *abbrevTitle = [[title substringToIndex:20] stringByAppendingString:@"..."];
+    
+    NSNumber *progress = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
+    //NSString *percentDoneString = [NSString stringWithFormat:@"%@", progress];
+
+    NSDecimalNumber *percentDone = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"10"]];
+    NSString *percentDoneString = [NSString stringWithFormat:@"%@%%", percentDone];
+    
+    
 
     
-	cell.textLabel.text = title;
+	cell.textLabel.text = abbrevTitle;
     cell.detailTextLabel.text = percentDoneString;
 	
     return cell;
@@ -318,8 +325,8 @@ NSMutableData* responseData;
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
     
     NSURL* url = [NSURL URLWithString: searchURL];
-    NSString* user = [url user];
-    NSString* pass = [url password];
+    //NSString* user = [url user];
+    //NSString* pass = [url password];
     
     NSData* responseData = [NSData dataWithContentsOfURL:url];
     NSError* error2 = nil;
@@ -342,8 +349,8 @@ NSMutableData* responseData;
 {
 
     torrentListArray = [resultDictionary objectForKey:@"torrents"];
-    NSString *name = [[torrentListArray objectAtIndex:1] objectAtIndex:2]; //TITLE is located at index 2
-    NSNumber *percent = [[torrentListArray objectAtIndex:1] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
+    //NSString *name = [[torrentListArray objectAtIndex:1] objectAtIndex:2]; //TITLE is located at index 2
+    //NSNumber *percent = [[torrentListArray objectAtIndex:1] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
 
     
 }

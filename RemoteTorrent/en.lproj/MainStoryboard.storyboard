@@ -142,7 +142,10 @@
                             <outlet property="delegate" destination="12" id="15"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Torrents" id="36"/>
+                    <navigationItem key="navigationItem" title="Torrents" id="36">
+                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="72j-2I-TAv"/>
+                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="AKv-dF-Q6Z"/>
+                    </navigationItem>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
             </objects>
@@ -205,7 +208,6 @@
         <class className="RTLoginController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RTLoginController.h"/>
             <relationships>
-                <relationship kind="action" name="logInPressed:"/>
                 <relationship kind="outlet" name="ipAddressField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="portField" candidateClass="UITextField"/>
                 <relationship kind="outlet" name="staySignedOnSwitch" candidateClass="UISwitch"/>
