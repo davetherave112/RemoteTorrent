@@ -105,7 +105,7 @@ NSMutableData* responseData;
     
 	// Configure the cell:
 	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
-    NSNumber *percentDone = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 2
+    NSNumber *percentDone = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
     NSString *percentDoneString = [NSString stringWithFormat:@"%@", percentDone];
 
     
@@ -265,6 +265,7 @@ NSMutableData* responseData;
     
     
     //self.ipAddress = @"guest@192.168.1.6";
+    self.ipAddress = @"guest@108.29.127.70";
     self.ipAddress = @"admin:12345@108.29.127.70";
     self.port = @"18921";
     
@@ -293,7 +294,7 @@ NSMutableData* responseData;
     //if (!error) {
         
         NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
-        [tokenScanner scanUpToString:@"display:none;'>" intoString:NULL];
+        [tokenScanner scanUpToString:@"'>" intoString:NULL];
         [tokenScanner scanUpToString:@"</div>" intoString:&token];
     
     //token = @"Znfv9Q7TfvJsgsX1d-z9nzgsCNlArJhfl-o8bqYzeAx3f9wPCXQTk_A-bVEAAAAA";
@@ -307,35 +308,43 @@ NSMutableData* responseData;
 
     // home ip address
     //108.29.127.70/
-    
+    token = [token substringFromIndex:2];
     
     // Formulate BitTorrent API search URL:
-    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token=lMtHnFixRFkGXJsbQs9hkH_5RIg9gPElkt5UX8cr2izaHoCpvsbJfqtRbVEAAAAA"];
-    //searchURL = [searchURL stringByAppendingString:token];
-
-    
+    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token="];
+    searchURL = [searchURL stringByAppendingString:token];
     
     // Perform BitTorrent API search:
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSData* responseData = [NSData dataWithContentsOfURL:[NSURL URLWithString: searchURL]];
-        NSError* error2;
     
-	//NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+    NSURL* url = [NSURL URLWithString: searchURL];
+    NSString* user = [url user];
+    NSString* pass = [url password];
     
-    
+    NSData* responseData = [NSData dataWithContentsOfURL:url];
+    NSError* error2 = nil;
     resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
-        
+    /*
+    NSError* err = nil;
+    NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString: searchURL] encoding:NSUTF8StringEncoding  error:&err];
+    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:searchURL]];
+	//NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+*/
         //dispatch_async(dispatch_get_main_queue(), ^{
             [self processTorrentResults];
             //return resultDictionary;
         //});
     //});
+    return resultDictionary;
 }
 
 - (void) processTorrentResults
 {
 
     torrentListArray = [resultDictionary objectForKey:@"torrents"];
+    NSString *name = [[torrentListArray objectAtIndex:1] objectAtIndex:2]; //TITLE is located at index 2
+    NSNumber *percent = [[torrentListArray objectAtIndex:1] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
+
     
 }
 
