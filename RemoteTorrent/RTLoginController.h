@@ -8,10 +8,19 @@
 
 #import <UIKit/UIKit.h>
 
+@class RTLoginController;
+@protocol loginToBittorrentDelegate <NSObject>
+
+-(void) loginToBittorrent:(RTLoginController*) controller didEnterCredentials: (NSArray*) loginCredentials;
+
+@end
+
 @interface RTLoginController : UIViewController
 
-@property (weak, nonatomic) IBOutlet UITextField *ipAddressField;
-@property (weak, nonatomic) IBOutlet UITextField *portField;
-@property (weak, nonatomic) IBOutlet UISwitch *staySignedOnSwitch;
+@property (nonatomic, weak) id <loginToBittorrentDelegate> delegate;
+
+@property (strong, nonatomic) IBOutlet UITextField *ipAddressField;
+@property (strong, nonatomic) IBOutlet UITextField *portField;
+@property (strong, nonatomic) IBOutlet UISwitch *staySignedOnSwitch;
 
 @end

@@ -7,8 +7,9 @@
 //
 
 #import "RTMasterViewController.h"
-
 #import "RTDetailViewController.h"
+#import "RTAddTorrentViewController.h"
+#import "RTLoginController.h"
 
 @interface RTMasterViewController ()
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath;
@@ -16,6 +17,8 @@
 
 
 @implementation RTMasterViewController
+
+@synthesize loggedIn;
 
 NSDictionary* resultDictionary;
 NSDictionary* torrentListDictionary;
@@ -35,15 +38,35 @@ NSMutableData* responseData;
 - (void)viewDidLoad
 {
     [super viewDidLoad];
+    
+    self.loggedIn = NO;
+    
+    if(!self.loggedIn)
+    {
+        //Present Login Controller
+        
+        RTLoginController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+        
+        loginView.modalPresentationStyle = UIModalPresentationFormSheet;
+        loginView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+        
+        loginView.delegate = self;
+        
+        
+        [self presentViewController:loginView animated:YES completion:nil];
+        
+    }
+    
 	// Do any additional setup after loading the view, typically from a nib.
     
     //self.navigationItem.leftBarButtonItem = self.editButtonItem;
     
+    
     [self.tableView setAllowsSelection:YES];
     
     
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTorrent:)];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getTorrentURL:)];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonPressed:)];
     UIBarButtonItem *pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseTorrent:)];
     UIBarButtonItem *resumeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumeTorrent:)];
     UIBarButtonItem *removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeTorrent:)];
@@ -58,8 +81,57 @@ NSMutableData* responseData;
     self.navigationItem.rightBarButtonItems = rightButtonArray;
     
     
+    
+    
+    
+}
+
+- (void) loginButtonPressed:(id)sender
+{
+    //Present Login Controller
+    RTLoginController *loginView = [self.storyboard instantiateViewControllerWithIdentifier:@"LoginPage"];
+    
+    loginView.modalPresentationStyle = UIModalPresentationFormSheet;
+    loginView.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal;
+
+    loginView.delegate = self;
+    
+    [self presentViewController:loginView animated:YES completion:nil];
+    
+}
+
+-(void) loginToBittorrent:(RTLoginController*) controller didEnterCredentials: (NSArray*) loginCredentials
+{
+    //Store IP Address and Port
+    self.ipAddress = [loginCredentials objectAtIndex:0];
+    self.port = [loginCredentials objectAtIndex:1];
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    self.loggedIn = YES;
+    
+    /*
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTorrent:)];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
+    UIBarButtonItem *pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseTorrent:)];
+    UIBarButtonItem *resumeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumeTorrent:)];
+    UIBarButtonItem *removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeTorrent:)];
+    
+    
+    
+    NSArray *leftButtonArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
+    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects:editButton, removeButton, nil];
+    
+    
+    self.navigationItem.leftBarButtonItems =leftButtonArray;
+    self.navigationItem.rightBarButtonItems = rightButtonArray;
+     
+    */
+    
     torrentListDictionary = [self getTorrentList];
     
+    [self.tableView reloadData];
+
     
 }
 
@@ -104,7 +176,14 @@ NSMutableData* responseData;
     return [sectionInfo numberOfObjects];
      */
     
-    return torrentListArray.count;
+    if (self.loggedIn)
+    {
+        return torrentListArray.count;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -149,26 +228,7 @@ NSMutableData* responseData;
 }
 
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    
-    /*[tableView deselectRowAtIndexPath:indexPath animated:NO];
-    NSInteger catIndex = [taskCategories indexOfObject:self.currentCategory];
-    if (catIndex == indexPath.row) {
-        return;
-    }
-    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:catIndex inSection:0];
-    
-    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
-    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
-        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
-        self.currentCategory = [taskCategories objectAtIndex:indexPath.row];
-    }
-    
-    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
-    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
-        oldCell.accessoryType = UITableViewCellAccessoryNone;
-    }*/
-    
+{   
     
     selectedTorrent = [torrentListArray objectAtIndex:[indexPath indexAtPosition:0]];
 }
@@ -243,12 +303,13 @@ NSMutableData* responseData;
     
     
     //self.ipAddress = @"guest@192.168.1.6";
-    self.ipAddress = @"guest@108.29.127.70";
-    self.ipAddress = @"admin:12345@108.29.127.70";
-    self.port = @"18921";
+    //self.ipAddress = @"guest@108.29.127.70";
+    //self.ipAddress = @"admin:12345@108.29.127.70";
+    //self.port = @"18921";
     
     
     // Get token
+    baseURLString = [baseURLString stringByAppendingString:@"admin:12345@"];
     baseURLString = [baseURLString stringByAppendingString:self.ipAddress];
     baseURLString = [baseURLString stringByAppendingString:@":"];
     baseURLString = [baseURLString stringByAppendingString:self.port];
@@ -324,7 +385,7 @@ NSMutableData* responseData;
 
     
 }
-- (void)addNewTorrent:(id)sender
+- (void)getTorrentURL:(id)sender
 {
     
     RTAddTorrentViewController *addTorrentView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTorrentViewController"];
@@ -332,16 +393,38 @@ NSMutableData* responseData;
     addTorrentView.modalPresentationStyle = UIModalPresentationFormSheet;
     addTorrentView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
     
+    addTorrentView.delegate = self;
+    
     [self presentViewController:addTorrentView animated:YES completion:nil];
     
-    NSString* newTorrentURLString = nil;
+}
+
+-(void) addNewTorrent:(RTAddTorrentViewController*) controller didEnterTorrentURL: (NSString*) torrentURL
+{
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSString* newTorrentURLString = torrentURL;
     
     // Create HTTP Request URL
     NSString* addTorrentURLString = [baseURLString stringByAppendingString:@"&action=add-url&s="];
-    //addTorrentURLString = [addTorrentURLString stringByAppendingString:newTorrentURLString];
+    addTorrentURLString = [addTorrentURLString stringByAppendingString:newTorrentURLString];
+    
+    NSURL* url = [NSURL URLWithString: addTorrentURLString];
+    
+    NSURLRequest *addTorrentRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSData *urlData;
+    NSURLResponse *response;
+    NSError *error;
+    
+    // Make synchronous request
+    urlData = [NSURLConnection sendSynchronousRequest:addTorrentRequest
+                                    returningResponse:&response
+                                                error:&error];
 
     
 }
+
 
 - (void) removeTorrent:(id)sender
 {

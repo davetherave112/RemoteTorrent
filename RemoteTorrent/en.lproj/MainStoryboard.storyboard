@@ -13,91 +13,12 @@
                         <color key="tintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="12" kind="relationship" relationship="rootViewController" id="Sdn-vA-n5D"/>
+                        <segue destination="12" kind="relationship" relationship="rootViewController" id="EFl-Eh-9ou"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-398" y="108"/>
-        </scene>
-        <!--Master View Controller - BitTorrent Remote-->
-        <scene sceneID="36n-cE-0a4">
-            <objects>
-                <viewController id="iRa-9O-Xl1" customClass="RTMasterViewController" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="E6O-mv-tW8">
-                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                        <subviews>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Port" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="4FI-gP-I7x">
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IP Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="ZEJ-hy-RNb">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="155" id="vea-cv-m5N"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
-                            </textField>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ua0-n6-bHV">
-                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="52" id="1dQ-qI-jdf"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
-                                <state key="normal" title="Log In">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <state key="highlighted">
-                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </state>
-                                <connections>
-                                    <action selector="logInPressed:" destination="iRa-9O-Xl1" eventType="touchUpInside" id="bad-h9-8q6"/>
-                                </connections>
-                            </button>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bittorrent-logo-purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="WI0-He-vbr">
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="240" id="Kzw-ZI-nqC"/>
-                                    <constraint firstAttribute="height" constant="102" id="xNW-xx-MVc"/>
-                                </constraints>
-                            </imageView>
-                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9ue-j1-jp1"/>
-                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stay Signed In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="4Hy-qP-qxH">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="4FI-gP-I7x" firstAttribute="leading" secondItem="Ua0-n6-bHV" secondAttribute="leading" type="default" id="0HM-IB-rAf"/>
-                            <constraint firstItem="Ua0-n6-bHV" firstAttribute="trailing" secondItem="4FI-gP-I7x" secondAttribute="trailing" type="default" id="7gL-GX-bsG"/>
-                            <constraint firstItem="ZEJ-hy-RNb" firstAttribute="leading" secondItem="4FI-gP-I7x" secondAttribute="leading" type="default" id="BYm-W5-OMG"/>
-                            <constraint firstItem="WI0-He-vbr" firstAttribute="centerX" secondItem="E6O-mv-tW8" secondAttribute="centerX" type="default" id="CiG-JZ-RmY"/>
-                            <constraint firstItem="WI0-He-vbr" firstAttribute="top" secondItem="E6O-mv-tW8" secondAttribute="top" constant="20" symbolic="YES" type="default" id="E8F-eq-q9Y"/>
-                            <constraint firstAttribute="bottom" secondItem="Ua0-n6-bHV" secondAttribute="bottom" constant="65" id="FHo-t0-1vV"/>
-                            <constraint firstItem="4Hy-qP-qxH" firstAttribute="leading" secondItem="E6O-mv-tW8" secondAttribute="leading" constant="69" id="PZ5-wA-NMk"/>
-                            <constraint firstItem="Ua0-n6-bHV" firstAttribute="top" secondItem="9ue-j1-jp1" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="PoL-PN-Qkw"/>
-                            <constraint firstItem="9ue-j1-jp1" firstAttribute="top" secondItem="4FI-gP-I7x" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="URh-hM-g55"/>
-                            <constraint firstItem="WI0-He-vbr" firstAttribute="centerX" secondItem="ZEJ-hy-RNb" secondAttribute="centerX" type="default" id="aqK-qu-a7p"/>
-                            <constraint firstItem="4Hy-qP-qxH" firstAttribute="centerY" secondItem="9ue-j1-jp1" secondAttribute="centerY" type="default" id="hZb-Vy-31v"/>
-                            <constraint firstItem="9ue-j1-jp1" firstAttribute="leading" secondItem="4Hy-qP-qxH" secondAttribute="trailing" constant="8" symbolic="YES" type="default" id="nG3-jD-Yv0"/>
-                            <constraint firstItem="ZEJ-hy-RNb" firstAttribute="trailing" secondItem="4FI-gP-I7x" secondAttribute="trailing" type="default" id="xiJ-M7-IPM"/>
-                            <constraint firstItem="ZEJ-hy-RNb" firstAttribute="top" secondItem="E6O-mv-tW8" secondAttribute="top" constant="181" id="xlo-og-TYV"/>
-                        </constraints>
-                    </view>
-                    <navigationItem key="navigationItem" title="BitTorrent Remote" id="Nbs-7Z-hqb"/>
-                    <connections>
-                        <outlet property="IPAddressField" destination="ZEJ-hy-RNb" id="E0B-9m-0qc"/>
-                        <outlet property="ipAddressField" destination="ZEJ-hy-RNb" id="Sy3-se-bJh"/>
-                        <outlet property="portField" destination="4FI-gP-I7x" id="bBH-BH-qFD"/>
-                        <outlet property="staySignedOnSwitch" destination="9ue-j1-jp1" id="JI1-ad-TaP"/>
-                    </connections>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="PCh-di-HLm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="34" y="427"/>
+            <point key="canvasLocation" x="-398" y="114"/>
         </scene>
         <!--Add Torrent View Controller-->
         <scene sceneID="mTi-0O-2TE">
@@ -142,10 +63,108 @@
                             <constraint firstItem="hJE-kL-azG" firstAttribute="trailing" secondItem="Wrf-R1-fGZ" secondAttribute="trailing" type="default" id="zuc-3P-PAA"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="torrentURL" destination="Ntn-hu-Eov" id="V3O-0x-bc2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3DG-Co-bzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="710"/>
+            <point key="canvasLocation" x="991" y="710"/>
+        </scene>
+        <!--Login Controller-->
+        <scene sceneID="Ntb-6G-Y79">
+            <objects>
+                <viewController storyboardIdentifier="LoginPage" id="qv5-zV-nBe" customClass="RTLoginController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="eYx-Wd-zqU">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vq7-XU-1lf">
+                                <color key="tintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Login" id="aQO-aq-OWM">
+                                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Pkj-KG-Huc">
+                                            <connections>
+                                                <action selector="loginCancel:" destination="qv5-zV-nBe" id="cOh-w2-544"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Save" id="dA2-pb-YIw">
+                                            <color key="tintColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="logInPressed:" destination="qv5-zV-nBe" id="5Pg-DC-RGa"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" image="bittorrent-logo-purple.png" translatesAutoresizingMaskIntoConstraints="NO" id="6jJ-26-JIU">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="240" id="Gvj-MP-EK7"/>
+                                    <constraint firstAttribute="height" constant="102" id="gQ2-W4-ZCQ"/>
+                                </constraints>
+                            </imageView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAE-1I-C9J">
+                                <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="52" id="21q-jU-nGB"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <state key="normal" title="Log In">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                                <state key="highlighted">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                </state>
+                            </button>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Port" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJ0-0L-R9B">
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="IP Address" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="q4H-pa-iQP">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="155" id="fMc-pm-S02"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="decimalPad"/>
+                            </textField>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stay Signed In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyq-qa-VlA">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" on="YES" translatesAutoresizingMaskIntoConstraints="NO" id="NMw-Ze-4dQ"/>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="TJ0-0L-R9B" firstAttribute="leading" secondItem="q4H-pa-iQP" secondAttribute="leading" type="default" id="1gX-Jl-3Il"/>
+                            <constraint firstAttribute="bottom" secondItem="uAE-1I-C9J" secondAttribute="bottom" constant="39" id="4P2-t5-a2u"/>
+                            <constraint firstItem="vq7-XU-1lf" firstAttribute="trailing" secondItem="eYx-Wd-zqU" secondAttribute="trailing" type="default" id="59I-7U-2Yg"/>
+                            <constraint firstItem="uAE-1I-C9J" firstAttribute="trailing" secondItem="TJ0-0L-R9B" secondAttribute="trailing" type="default" id="8GI-7N-KVu"/>
+                            <constraint firstAttribute="bottom" secondItem="NMw-Ze-4dQ" secondAttribute="bottom" constant="113" id="8g2-dh-ehY"/>
+                            <constraint firstItem="q4H-pa-iQP" firstAttribute="centerX" secondItem="vq7-XU-1lf" secondAttribute="centerX" type="default" id="IJs-e1-e3o"/>
+                            <constraint firstItem="TJ0-0L-R9B" firstAttribute="leading" secondItem="uAE-1I-C9J" secondAttribute="leading" type="default" id="S03-xS-Hm4"/>
+                            <constraint firstItem="TJ0-0L-R9B" firstAttribute="centerY" secondItem="eYx-Wd-zqU" secondAttribute="centerY" type="default" id="WDD-Ot-YfC"/>
+                            <constraint firstItem="vq7-XU-1lf" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" type="default" id="XN2-ZS-6uL"/>
+                            <constraint firstAttribute="bottom" secondItem="Jyq-qa-VlA" secondAttribute="bottom" constant="153" id="XXT-Ze-wOH"/>
+                            <constraint firstItem="6jJ-26-JIU" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" constant="50" id="gou-xI-Whn"/>
+                            <constraint firstItem="TJ0-0L-R9B" firstAttribute="trailing" secondItem="q4H-pa-iQP" secondAttribute="trailing" type="default" id="hCx-eU-1Wq"/>
+                            <constraint firstItem="Jyq-qa-VlA" firstAttribute="centerX" secondItem="TJ0-0L-R9B" secondAttribute="centerX" type="default" id="i7O-xi-Bzw"/>
+                            <constraint firstItem="vq7-XU-1lf" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" type="default" id="ojy-Ea-gQ9"/>
+                            <constraint firstItem="NMw-Ze-4dQ" firstAttribute="centerX" secondItem="Jyq-qa-VlA" secondAttribute="centerX" type="default" id="qsA-5q-wwc"/>
+                            <constraint firstItem="q4H-pa-iQP" firstAttribute="top" secondItem="6jJ-26-JIU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="tSU-Ts-nad"/>
+                            <constraint firstItem="q4H-pa-iQP" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" constant="179" id="yMs-D2-EaB"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="ipAddressField" destination="q4H-pa-iQP" id="chE-Ne-AdY"/>
+                        <outlet property="portField" destination="TJ0-0L-R9B" id="fFc-Xm-rib"/>
+                        <outlet property="staySignedOnSwitch" destination="NMw-Ze-4dQ" id="YU4-0x-b17"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="UVc-na-0aT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="58" y="531"/>
         </scene>
         <!--Master View Controller - Master-->
         <scene sceneID="18">
@@ -194,7 +213,7 @@
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="465" y="108"/>
+            <point key="canvasLocation" x="499" y="114"/>
         </scene>
         <!--Detail View Controller - Detail-->
         <scene sceneID="24">
@@ -234,38 +253,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="909" y="108"/>
+            <point key="canvasLocation" x="991" y="114"/>
         </scene>
     </scenes>
     <resources>
         <image name="bittorrent-logo-purple.png" width="1200" height="512"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="RTAddTorrentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTAddTorrentViewController.h"/>
-            <relationships>
-                <relationship kind="action" name="cancelView:"/>
-                <relationship kind="action" name="saveNewTorrent:"/>
-            </relationships>
-        </class>
-        <class className="RTDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RTMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTMasterViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ipAddressField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="portField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="staySignedOnSwitch" candidateClass="UISwitch"/>
-            </relationships>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

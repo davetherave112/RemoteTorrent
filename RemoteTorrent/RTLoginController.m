@@ -17,6 +17,8 @@
 NSString* ipAddress;
 NSString* port;
 
+//NSArray* credentialsArray;
+
 @synthesize ipAddressField;
 @synthesize portField;
 @synthesize staySignedOnSwitch;
@@ -44,10 +46,21 @@ NSString* port;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
+
 - (IBAction)logInPressed:(id)sender {
     
     ipAddress = ipAddressField.text;
     port = portField.text;
+    
+    NSArray *credentialsArray = [NSArray arrayWithObjects:ipAddressField.text, portField.text, nil];
+    
+    
+    [self.delegate loginToBittorrent:self didEnterCredentials:credentialsArray];
+    
+}
+- (IBAction)loginCancel:(id)sender {
+    
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 @end
