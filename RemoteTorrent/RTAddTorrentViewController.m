@@ -14,6 +14,8 @@
 
 @implementation RTAddTorrentViewController
 
+@synthesize torrentURL;
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -42,8 +44,10 @@
     
     // DO STUFF TO ADD TORRENT
     
-    [self dismissViewControllerAnimated:YES completion:nil];
-
+    NSString *addTorrentURLString = torrentURL.text;
+    
+    [self.delegate addNewTorrent:self didEnterTorrentURL:addTorrentURLString];
+    
 }
 
 @end

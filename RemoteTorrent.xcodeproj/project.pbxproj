@@ -107,12 +107,12 @@
 		B269D3D3171762A500723864 /* RemoteTorrent */ = {
 			isa = PBXGroup;
 			children = (
+				B269D3F6171769F300723864 /* bittorrent-logo-purple.png */,
 				B269D3DC171762A500723864 /* RTAppDelegate.h */,
 				B269D3DD171762A500723864 /* RTAppDelegate.m */,
 				B269D3E5171762A500723864 /* MainStoryboard.storyboard */,
 				B2F2A200171FBAB000E1EA08 /* RTAddTorrentViewController.h */,
 				B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */,
-				B269D3F6171769F300723864 /* bittorrent-logo-purple.png */,
 				B2FB013417189011002B17D1 /* RTLoginController.h */,
 				B2FB013517189011002B17D1 /* RTLoginController.m */,
 				B269D3EB171762A500723864 /* RTMasterViewController.h */,
