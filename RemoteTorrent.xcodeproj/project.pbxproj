@@ -23,6 +23,7 @@
 		B269D3ED171762A500723864 /* RTMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EC171762A500723864 /* RTMasterViewController.m */; };
 		B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EF171762A500723864 /* RTDetailViewController.m */; };
 		B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3F6171769F300723864 /* bittorrent-logo-purple.png */; };
+		B2F2A202171FBAB000E1EA08 /* RTAddTorrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */; };
 		B2FB013617189011002B17D1 /* RTLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FB013517189011002B17D1 /* RTLoginController.m */; };
 /* End PBXBuildFile section */
 
@@ -51,6 +52,8 @@
 		B269D3F6171769F300723864 /* bittorrent-logo-purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bittorrent-logo-purple.png"; sourceTree = "<group>"; };
 		B269D3F81718471B00723864 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		B269D3FA1718578800723864 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		B2F2A200171FBAB000E1EA08 /* RTAddTorrentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTAddTorrentViewController.h; sourceTree = "<group>"; };
+		B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTAddTorrentViewController.m; sourceTree = "<group>"; };
 		B2FB013417189011002B17D1 /* RTLoginController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTLoginController.h; sourceTree = "<group>"; };
 		B2FB013517189011002B17D1 /* RTLoginController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTLoginController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -107,6 +110,8 @@
 				B269D3DC171762A500723864 /* RTAppDelegate.h */,
 				B269D3DD171762A500723864 /* RTAppDelegate.m */,
 				B269D3E5171762A500723864 /* MainStoryboard.storyboard */,
+				B2F2A200171FBAB000E1EA08 /* RTAddTorrentViewController.h */,
+				B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */,
 				B269D3F6171769F300723864 /* bittorrent-logo-purple.png */,
 				B2FB013417189011002B17D1 /* RTLoginController.h */,
 				B2FB013517189011002B17D1 /* RTLoginController.m */,
@@ -209,6 +214,7 @@
 				B269D3ED171762A500723864 /* RTMasterViewController.m in Sources */,
 				B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */,
 				B2FB013617189011002B17D1 /* RTLoginController.m in Sources */,
+				B2F2A202171FBAB000E1EA08 /* RTAddTorrentViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

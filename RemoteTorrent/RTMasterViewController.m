@@ -20,6 +20,10 @@
 NSDictionary* resultDictionary;
 NSDictionary* torrentListDictionary;
 NSArray* torrentListArray;
+NSArray* selectedTorrent;
+
+NSString* baseURLString = @"http://";
+
 
 NSMutableData* responseData;
 
@@ -32,12 +36,27 @@ NSMutableData* responseData;
 {
     [super viewDidLoad];
 	// Do any additional setup after loading the view, typically from a nib.
-    /*
-    self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    //self.navigationItem.leftBarButtonItem = self.editButtonItem;
+    
+    [self.tableView setAllowsSelection:YES];
+    
+    
+    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTorrent:)];
+    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
+    UIBarButtonItem *pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseTorrent:)];
+    UIBarButtonItem *resumeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumeTorrent:)];
+    UIBarButtonItem *removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeTorrent:)];
+    
+    
+    
+    NSArray *leftButtonArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
+    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects:editButton, removeButton, nil];
 
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(insertNewObject:)];
-    self.navigationItem.rightBarButtonItem = addButton;
-     */
+
+    self.navigationItem.leftBarButtonItems =leftButtonArray;
+    self.navigationItem.rightBarButtonItems = rightButtonArray;
+    
     
     torrentListDictionary = [self getTorrentList];
     
@@ -49,7 +68,7 @@ NSMutableData* responseData;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
+/*
 - (void)insertNewObject:(id)sender
 {
     NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
@@ -68,7 +87,7 @@ NSMutableData* responseData;
         NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
         abort();
     }
-}
+}*/
 
 #pragma mark - Table View
 
@@ -105,7 +124,7 @@ NSMutableData* responseData;
     
 	// Configure the cell:
 	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
-    NSString *abbrevTitle = [[title substringToIndex:20] stringByAppendingString:@"..."];
+    NSString *abbrevTitle = [[title substringToIndex:19] stringByAppendingString:@"..."];
     
     NSNumber *progress = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
     //NSString *percentDoneString = [NSString stringWithFormat:@"%@", progress];
@@ -124,6 +143,37 @@ NSMutableData* responseData;
     
 }
 
+- (NSIndexPath *)tableView:(UITableView *)tableView willSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return indexPath;
+}
+
+-(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    
+    /*[tableView deselectRowAtIndexPath:indexPath animated:NO];
+    NSInteger catIndex = [taskCategories indexOfObject:self.currentCategory];
+    if (catIndex == indexPath.row) {
+        return;
+    }
+    NSIndexPath *oldIndexPath = [NSIndexPath indexPathForRow:catIndex inSection:0];
+    
+    UITableViewCell *newCell = [tableView cellForRowAtIndexPath:indexPath];
+    if (newCell.accessoryType == UITableViewCellAccessoryNone) {
+        newCell.accessoryType = UITableViewCellAccessoryCheckmark;
+        self.currentCategory = [taskCategories objectAtIndex:indexPath.row];
+    }
+    
+    UITableViewCell *oldCell = [tableView cellForRowAtIndexPath:oldIndexPath];
+    if (oldCell.accessoryType == UITableViewCellAccessoryCheckmark) {
+        oldCell.accessoryType = UITableViewCellAccessoryNone;
+    }*/
+    
+    
+    selectedTorrent = [torrentListArray objectAtIndex:[indexPath indexAtPosition:0]];
+}
+
+/*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
     // Return NO if you do not want the specified item to be editable.
@@ -150,7 +200,7 @@ NSMutableData* responseData;
 {
     // The table view should not be re-orderable.
     return NO;
-}
+}*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -161,94 +211,15 @@ NSMutableData* responseData;
     }
 }
 
-#pragma mark - Fetched results controller
 
-- (NSFetchedResultsController *)fetchedResultsController
-{
-    if (_fetchedResultsController != nil) {
-        return _fetchedResultsController;
-    }
-    
-    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
-    // Edit the entity name as appropriate.
-    NSEntityDescription *entity = [NSEntityDescription entityForName:@"Event" inManagedObjectContext:self.managedObjectContext];
-    [fetchRequest setEntity:entity];
-    
-    // Set the batch size to a suitable number.
-    [fetchRequest setFetchBatchSize:20];
-    
-    // Edit the sort key as appropriate.
-    NSSortDescriptor *sortDescriptor = [[NSSortDescriptor alloc] initWithKey:@"timeStamp" ascending:NO];
-    NSArray *sortDescriptors = @[sortDescriptor];
-    
-    [fetchRequest setSortDescriptors:sortDescriptors];
-    
-    // Edit the section name key path and cache name if appropriate.
-    // nil for section name key path means "no sections".
-    NSFetchedResultsController *aFetchedResultsController = [[NSFetchedResultsController alloc] initWithFetchRequest:fetchRequest managedObjectContext:self.managedObjectContext sectionNameKeyPath:nil cacheName:@"Master"];
-    aFetchedResultsController.delegate = self;
-    self.fetchedResultsController = aFetchedResultsController;
-    
-	NSError *error = nil;
-	if (![self.fetchedResultsController performFetch:&error]) {
-	     // Replace this implementation with code to handle the error appropriately.
-	     // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-	    NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-	    abort();
-	}
-    
-    return _fetchedResultsController;
-}    
 
-- (void)controllerWillChangeContent:(NSFetchedResultsController *)controller
-{
-    [self.tableView beginUpdates];
-}
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeSection:(id <NSFetchedResultsSectionInfo>)sectionInfo
-           atIndex:(NSUInteger)sectionIndex forChangeType:(NSFetchedResultsChangeType)type
-{
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [self.tableView insertSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [self.tableView deleteSections:[NSIndexSet indexSetWithIndex:sectionIndex] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
 
-- (void)controller:(NSFetchedResultsController *)controller didChangeObject:(id)anObject
-       atIndexPath:(NSIndexPath *)indexPath forChangeType:(NSFetchedResultsChangeType)type
-      newIndexPath:(NSIndexPath *)newIndexPath
-{
-    UITableView *tableView = self.tableView;
-    
-    switch(type) {
-        case NSFetchedResultsChangeInsert:
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeDelete:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-            
-        case NSFetchedResultsChangeUpdate:
-            [self configureCell:[tableView cellForRowAtIndexPath:indexPath] atIndexPath:indexPath];
-            break;
-            
-        case NSFetchedResultsChangeMove:
-            [tableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationFade];
-            [tableView insertRowsAtIndexPaths:@[newIndexPath] withRowAnimation:UITableViewRowAnimationFade];
-            break;
-    }
-}
-
+/*
 - (void)controllerDidChangeContent:(NSFetchedResultsController *)controller
 {
     [self.tableView endUpdates];
-}
+}*/
 
 /*
 // Implementing the above methods to update the table view in response to individual changes may have performance implications if a large number of changes are made simultaneously. If this proves to be an issue, you can instead just implement controllerDidChangeContent: which notifies the delegate that all section and object changes have been processed. 
@@ -259,12 +230,12 @@ NSMutableData* responseData;
     [self.tableView reloadData];
 }
  */
-
+/*
 - (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
 {
     NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
     cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
-}
+}*/
 
 - (NSDictionary*)getTorrentList
 {
@@ -278,7 +249,6 @@ NSMutableData* responseData;
     
     
     // Get token
-    NSString* baseURLString = @"http://";
     baseURLString = [baseURLString stringByAppendingString:self.ipAddress];
     baseURLString = [baseURLString stringByAppendingString:@":"];
     baseURLString = [baseURLString stringByAppendingString:self.port];
@@ -296,7 +266,6 @@ NSMutableData* responseData;
     
 
     NSString* token;
-    //token = [tokenPage stringByStrippingTags];
     
     //if (!error) {
         
@@ -304,7 +273,6 @@ NSMutableData* responseData;
         [tokenScanner scanUpToString:@"'>" intoString:NULL];
         [tokenScanner scanUpToString:@"</div>" intoString:&token];
     
-    //token = @"Znfv9Q7TfvJsgsX1d-z9nzgsCNlArJhfl-o8bqYzeAx3f9wPCXQTk_A-bVEAAAAA";
         
     //}
     //else {
@@ -317,9 +285,11 @@ NSMutableData* responseData;
     //108.29.127.70/
     token = [token substringFromIndex:2];
     
+    baseURLString = [baseURLString stringByAppendingString:@"?token="];
+    baseURLString = [baseURLString stringByAppendingString:token];
+    
     // Formulate BitTorrent API search URL:
-    NSString* searchURL = [baseURLString stringByAppendingString:@"?list=1&token="];
-    searchURL = [searchURL stringByAppendingString:token];
+    NSString* searchURL = [baseURLString stringByAppendingString:@"&list=1"];
     
     // Perform BitTorrent API search:
     //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -354,6 +324,102 @@ NSMutableData* responseData;
 
     
 }
+- (void)addNewTorrent:(id)sender
+{
+    
+    RTAddTorrentViewController *addTorrentView = [self.storyboard instantiateViewControllerWithIdentifier:@"AddTorrentViewController"];
+    
+    addTorrentView.modalPresentationStyle = UIModalPresentationFormSheet;
+    addTorrentView.modalTransitionStyle = UIModalTransitionStyleCoverVertical;
+    
+    [self presentViewController:addTorrentView animated:YES completion:nil];
+    
+    NSString* newTorrentURLString = nil;
+    
+    // Create HTTP Request URL
+    NSString* addTorrentURLString = [baseURLString stringByAppendingString:@"&action=add-url&s="];
+    //addTorrentURLString = [addTorrentURLString stringByAppendingString:newTorrentURLString];
 
+    
+}
+
+- (void) removeTorrent:(id)sender
+{
+    
+    // Create HTTP Request URL
+    NSString* removeTorrentURLString = [baseURLString stringByAppendingString:@"&action=remove&hash="];
+    removeTorrentURLString = [removeTorrentURLString stringByAppendingString:[selectedTorrent objectAtIndex:0]]; //HASH is at index 0
+    
+    //Send request
+    
+    
+    NSURL* url = [NSURL URLWithString: removeTorrentURLString];
+    
+    NSURLRequest *removeTorrentRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSData *urlData;
+    NSURLResponse *response;
+    NSError *error;
+    
+    // Make synchronous request
+    urlData = [NSURLConnection sendSynchronousRequest:removeTorrentRequest
+                                    returningResponse:&response
+                                                error:&error];
+}
+
+- (void) resumeTorrent:(id)sender
+{
+    
+    // Create HTTP Request URL
+    NSString* resumeTorrentURLString = [baseURLString stringByAppendingString:@"&action=unpause&hash="];
+    resumeTorrentURLString = [resumeTorrentURLString stringByAppendingString:[selectedTorrent objectAtIndex:0]]; //HASH is at index 0
+    
+    //Send request
+    
+    
+    NSURL* url = [NSURL URLWithString: resumeTorrentURLString];
+    
+    NSURLRequest *resumeTorrentRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSData *urlData;
+    NSURLResponse *response;
+    NSError *error;
+    
+    // Make synchronous request
+    urlData = [NSURLConnection sendSynchronousRequest:resumeTorrentRequest
+                                    returningResponse:&response
+                                                error:&error];
+}
+
+- (void) pauseTorrent:(id)sender
+{
+    
+    // Create HTTP Request URL
+    NSString* pauseTorrentURLString = [baseURLString stringByAppendingString:@"&action=pause&hash="];
+    pauseTorrentURLString = [pauseTorrentURLString stringByAppendingString:[selectedTorrent objectAtIndex:0]]; //HASH is at index 0
+    
+    //Send request
+    
+    
+    NSURL* url = [NSURL URLWithString: pauseTorrentURLString];
+    
+    NSURLRequest *pauseTorrentRequest = [NSURLRequest requestWithURL:url cachePolicy:NSURLRequestReturnCacheDataElseLoad timeoutInterval:30];
+    
+    NSData *urlData;
+    NSURLResponse *response;
+    NSError *error;
+    
+    // Make synchronous request
+    urlData = [NSURLConnection sendSynchronousRequest:pauseTorrentRequest
+                                    returningResponse:&response
+                                                error:&error];
+}
+
+- (void)refreshPage:(id)sender
+{
+    
+    [self.tableView reloadData];
+    
+}
 
 @end

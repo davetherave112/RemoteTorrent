@@ -13,17 +13,17 @@
                         <color key="tintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843137254901" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
-                        <segue destination="12" kind="relationship" relationship="rootViewController" id="uPS-rO-P6g"/>
+                        <segue destination="12" kind="relationship" relationship="rootViewController" id="Sdn-vA-n5D"/>
                     </connections>
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="10" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-398" y="108"/>
         </scene>
-        <!--Login Controller - BitTorrent Remote-->
+        <!--Master View Controller - BitTorrent Remote-->
         <scene sceneID="36n-cE-0a4">
             <objects>
-                <viewController id="iRa-9O-Xl1" customClass="RTLoginController" sceneMemberID="viewController">
+                <viewController id="iRa-9O-Xl1" customClass="RTMasterViewController" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="E6O-mv-tW8">
                         <rect key="frame" x="0.0" y="20" width="320" height="460"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
@@ -99,6 +99,54 @@
             </objects>
             <point key="canvasLocation" x="34" y="427"/>
         </scene>
+        <!--Add Torrent View Controller-->
+        <scene sceneID="mTi-0O-2TE">
+            <objects>
+                <viewController storyboardIdentifier="AddTorrentViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="QKc-pA-n9Y" customClass="RTAddTorrentViewController" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="Wrf-R1-fGZ">
+                        <rect key="frame" x="0.0" y="20" width="320" height="460"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hJE-kL-azG">
+                                <color key="tintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <items>
+                                    <navigationItem title="Add Torrent" id="gDw-CE-8Pe">
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="vJD-jd-WCi">
+                                            <connections>
+                                                <action selector="cancelView:" destination="QKc-pA-n9Y" id="aTD-BI-wDT"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" title="Add" id="IPp-jX-AIv">
+                                            <color key="tintColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <connections>
+                                                <action selector="saveNewTorrent:" destination="QKc-pA-n9Y" id="hRu-ps-IU5"/>
+                                            </connections>
+                                        </barButtonItem>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Torrent URL" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Ntn-hu-Eov">
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="214" id="odk-Vb-wmP"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits" keyboardType="URL" returnKeyType="go" enablesReturnKeyAutomatically="YES"/>
+                            </textField>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="hJE-kL-azG" firstAttribute="top" secondItem="Wrf-R1-fGZ" secondAttribute="top" type="default" id="JZX-pV-KMY"/>
+                            <constraint firstItem="hJE-kL-azG" firstAttribute="leading" secondItem="Wrf-R1-fGZ" secondAttribute="leading" type="default" id="Jh6-7N-7rW"/>
+                            <constraint firstItem="Ntn-hu-Eov" firstAttribute="top" secondItem="Wrf-R1-fGZ" secondAttribute="top" constant="149" id="kjy-rq-AYD"/>
+                            <constraint firstItem="Ntn-hu-Eov" firstAttribute="centerX" secondItem="hJE-kL-azG" secondAttribute="centerX" type="default" id="och-vK-KAI"/>
+                            <constraint firstItem="hJE-kL-azG" firstAttribute="trailing" secondItem="Wrf-R1-fGZ" secondAttribute="trailing" type="default" id="zuc-3P-PAA"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="3DG-Co-bzx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="465" y="710"/>
+        </scene>
         <!--Master View Controller - Master-->
         <scene sceneID="18">
             <objects>
@@ -132,7 +180,7 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="21" kind="push" identifier="showDetail" id="jZb-fq-zAk"/>
+                                    <segue destination="21" kind="push" trigger="accessoryAction" id="ZPq-TH-QbX"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -142,10 +190,7 @@
                             <outlet property="delegate" destination="12" id="15"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Torrents" id="36">
-                        <barButtonItem key="leftBarButtonItem" systemItem="add" id="72j-2I-TAv"/>
-                        <barButtonItem key="rightBarButtonItem" systemItem="play" id="AKv-dF-Q6Z"/>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Torrents" id="36"/>
                 </tableViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="17" sceneMemberID="firstResponder"/>
             </objects>
@@ -199,18 +244,17 @@
         <class className="NSLayoutConstraint" superclassName="NSObject">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
         </class>
+        <class className="RTAddTorrentViewController" superclassName="UIViewController">
+            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTAddTorrentViewController.h"/>
+            <relationships>
+                <relationship kind="action" name="cancelView:"/>
+                <relationship kind="action" name="saveNewTorrent:"/>
+            </relationships>
+        </class>
         <class className="RTDetailViewController" superclassName="UIViewController">
             <source key="sourceIdentifier" type="project" relativePath="./Classes/RTDetailViewController.h"/>
             <relationships>
                 <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RTLoginController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTLoginController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="ipAddressField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="portField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="staySignedOnSwitch" candidateClass="UISwitch"/>
             </relationships>
         </class>
         <class className="RTMasterViewController" superclassName="UITableViewController">
