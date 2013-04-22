@@ -19,8 +19,14 @@
 
 @property (nonatomic, weak) id <loginToBittorrentDelegate> delegate;
 
-@property (strong, nonatomic) IBOutlet UITextField *ipAddressField;
-@property (strong, nonatomic) IBOutlet UITextField *portField;
+/*@property (strong, nonatomic) IBOutlet UITextField *usernameField;
+@property (strong, nonatomic) IBOutlet UITextField *passwordField;
+ */
+
+
+
 @property (strong, nonatomic) IBOutlet UISwitch *staySignedOnSwitch;
+@property (weak, nonatomic) IBOutlet UITextField *usernameField;
+@property (weak, nonatomic) IBOutlet UITextField *passwordField;
 
 @end

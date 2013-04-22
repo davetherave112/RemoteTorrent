@@ -30,6 +30,10 @@ NSString* baseURLString = @"http://";
 
 NSMutableData* responseData;
 
+NSUserDefaults *defaults;
+
+
+
 - (void)awakeFromNib
 {
     [super awakeFromNib];
@@ -39,9 +43,11 @@ NSMutableData* responseData;
 {
     [super viewDidLoad];
     
+    defaults = [NSUserDefaults standardUserDefaults];
+    
     self.loggedIn = NO;
     
-    if(!self.loggedIn)
+    if((!self.loggedIn) && ![defaults objectForKey:@"remember_login"])
     {
         //Present Login Controller
         
@@ -56,6 +62,14 @@ NSMutableData* responseData;
         [self presentViewController:loginView animated:YES completion:nil];
         
     }
+    else
+    {
+        torrentListDictionary = [self getTorrentList];
+        
+        [self.tableView reloadData];
+        //self.loggedIn = YES;
+        
+    }
     
 	// Do any additional setup after loading the view, typically from a nib.
     
@@ -66,15 +80,17 @@ NSMutableData* responseData;
     
     
     UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(getTorrentURL:)];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonPressed:)];
+    UIBarButtonItem *loginButton = [[UIBarButtonItem alloc] initWithTitle:@"Login" style:UIBarButtonItemStyleBordered target:self action:@selector(loginButtonPressed:)];
     UIBarButtonItem *pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseTorrent:)];
     UIBarButtonItem *resumeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumeTorrent:)];
     UIBarButtonItem *removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeTorrent:)];
+    UIBarButtonItem *refreshButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
+
     
     
     
     NSArray *leftButtonArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
-    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects:editButton, removeButton, nil];
+    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects: loginButton, refreshButton, removeButton, nil];
 
 
     self.navigationItem.leftBarButtonItems =leftButtonArray;
@@ -96,6 +112,14 @@ NSMutableData* responseData;
 
     loginView.delegate = self;
     
+    if ([defaults objectForKey:@"remember_login"])
+    {
+        [loginView.usernameField setText:[defaults objectForKey:@"username"]];
+        //loginView.usernameField.text = [defaults objectForKey:@"username"];
+        loginView.passwordField.text = [defaults objectForKey:@"password"];
+        [loginView.staySignedOnSwitch setOn:YES animated:YES];
+    }
+    
     [self presentViewController:loginView animated:YES completion:nil];
     
 }
@@ -103,30 +127,26 @@ NSMutableData* responseData;
 -(void) loginToBittorrent:(RTLoginController*) controller didEnterCredentials: (NSArray*) loginCredentials
 {
     //Store IP Address and Port
-    self.ipAddress = [loginCredentials objectAtIndex:0];
-    self.port = [loginCredentials objectAtIndex:1];
+    self.username = [loginCredentials objectAtIndex:0];
+    self.password = [loginCredentials objectAtIndex:1];
+    BOOL rememberLogin = [[loginCredentials objectAtIndex:2] boolValue];
+    
+    if (rememberLogin)
+    {
+        [defaults setObject:self.username forKey:@"username"];
+        [defaults setObject:self.password forKey:@"password"];
+        //[defaults setBool:self.rememberLogin forKey:@"remember_login"];
+        
+    }
+    else
+    {
+        [defaults removeObjectForKey:@"username"];
+        [defaults removeObjectForKey:@"password"];
+        [defaults removeObjectForKey:@"remember_login"];        
+    }
+    
     
     [self dismissViewControllerAnimated:YES completion:nil];
-    
-    self.loggedIn = YES;
-    
-    /*
-    UIBarButtonItem *addButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemAdd target:self action:@selector(addNewTorrent:)];
-    UIBarButtonItem *editButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemRefresh target:self action:@selector(refreshPage:)];
-    UIBarButtonItem *pauseButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPause target:self action:@selector(pauseTorrent:)];
-    UIBarButtonItem *resumeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemPlay target:self action:@selector(resumeTorrent:)];
-    UIBarButtonItem *removeButton = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemStop target:self action:@selector(removeTorrent:)];
-    
-    
-    
-    NSArray *leftButtonArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
-    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects:editButton, removeButton, nil];
-    
-    
-    self.navigationItem.leftBarButtonItems =leftButtonArray;
-    self.navigationItem.rightBarButtonItems = rightButtonArray;
-     
-    */
     
     torrentListDictionary = [self getTorrentList];
     
@@ -211,12 +231,25 @@ NSMutableData* responseData;
     NSDecimalNumber *percentDone = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"10"]];
     NSString *percentDoneString = [NSString stringWithFormat:@"%@%%", percentDone];
     
-    
-
+    NSDecimalNumber *percentDoneZeroToOne = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
     
 	cell.textLabel.text = abbrevTitle;
     cell.detailTextLabel.text = percentDoneString;
-	
+    
+    
+    
+
+    /*
+    UIProgressView* torrentProgressBar;
+    [torrentProgressBar initWithProgressViewStyle:UIProgressViewStyleBar];
+    torrentProgressBar.frame = CGRectMake(10, 10, 30, 30);
+    torrentProgressBar.progress = [percentDoneZeroToOne floatValue];
+    
+    torrentProgressBar.center = CGPointMake(23,21);
+    
+    [cell.contentView addSubview:torrentProgressBar];
+	*/
+    
     return cell;
     
     
@@ -233,6 +266,10 @@ NSMutableData* responseData;
     selectedTorrent = [torrentListArray objectAtIndex:[indexPath indexAtPosition:0]];
 }
 
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    return 66.0f;
+}
 /*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
 {
@@ -307,17 +344,27 @@ NSMutableData* responseData;
     //self.ipAddress = @"admin:12345@108.29.127.70";
     //self.port = @"18921";
     
+    if ([defaults objectForKey:@"remember_login"])
+    {
+        self.username = [defaults objectForKey:@"username"];
+        self.password = [defaults objectForKey:@"password"];
+    }
+    
+    
     
     // Get token
-    baseURLString = [baseURLString stringByAppendingString:@"admin:12345@"];
-    baseURLString = [baseURLString stringByAppendingString:self.ipAddress];
+    baseURLString = [baseURLString stringByAppendingString:self.username];
     baseURLString = [baseURLString stringByAppendingString:@":"];
-    baseURLString = [baseURLString stringByAppendingString:self.port];
+    baseURLString = [baseURLString stringByAppendingString:self.password];
+    baseURLString = [baseURLString stringByAppendingString:@"@"];
+    baseURLString = [baseURLString stringByAppendingString:[defaults objectForKey:@"ip_address"]];
+    baseURLString = [baseURLString stringByAppendingString:@":"];
+    baseURLString = [baseURLString stringByAppendingString:[defaults objectForKey:@"port"]];
     baseURLString = [baseURLString stringByAppendingString:@"/gui/"];
     
-    NSString* tokenURLString = [baseURLString stringByAppendingString:@"token.html"];
+    //baseURLString = @"admin:12345@108.29.127.70:18921/gui/";
     
-    //tokenURLString = @"https://www.google.com/";
+    NSString* tokenURLString = [baseURLString stringByAppendingString:@"token.html"];
     
     NSURL *tokenURL = [NSURL URLWithString:tokenURLString];
     NSError *error;
@@ -328,52 +375,57 @@ NSMutableData* responseData;
 
     NSString* token;
     
-    //if (!error) {
+    if (!error) {
         
         NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
         [tokenScanner scanUpToString:@"'>" intoString:NULL];
         [tokenScanner scanUpToString:@"</div>" intoString:&token];
     
+        self.loggedIn = YES;
         
-    //}
-    //else {
-        //report error to user
-    //}
-    
-    
-
-    // home ip address
-    //108.29.127.70/
-    token = [token substringFromIndex:2];
-    
-    baseURLString = [baseURLString stringByAppendingString:@"?token="];
-    baseURLString = [baseURLString stringByAppendingString:token];
-    
-    // Formulate BitTorrent API search URL:
-    NSString* searchURL = [baseURLString stringByAppendingString:@"&list=1"];
-    
-    // Perform BitTorrent API search:
-    //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-    
-    NSURL* url = [NSURL URLWithString: searchURL];
-    //NSString* user = [url user];
-    //NSString* pass = [url password];
-    
-    NSData* responseData = [NSData dataWithContentsOfURL:url];
-    NSError* error2 = nil;
-    resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
-    /*
-    NSError* err = nil;
-    NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString: searchURL] encoding:NSUTF8StringEncoding  error:&err];
-    NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:searchURL]];
-	//NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
-*/
+        // home ip address
+        //108.29.127.70/
+        token = [token substringFromIndex:2];
+        
+        baseURLString = [baseURLString stringByAppendingString:@"?token="];
+        baseURLString = [baseURLString stringByAppendingString:token];
+        
+        // Formulate BitTorrent API search URL:
+        NSString* searchURL = [baseURLString stringByAppendingString:@"&list=1"];
+        
+        // Perform BitTorrent API search:
+        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL* url = [NSURL URLWithString: searchURL];
+        //NSString* user = [url user];
+        //NSString* pass = [url password];
+        
+        NSData* responseData = [NSData dataWithContentsOfURL:url];
+        NSError* error2 = nil;
+        resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
+        /*
+         NSError* err = nil;
+         NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString: searchURL] encoding:NSUTF8StringEncoding  error:&err];
+         NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:searchURL]];
+         //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
+         */
         //dispatch_async(dispatch_get_main_queue(), ^{
-            [self processTorrentResults];
-            //return resultDictionary;
+        [self processTorrentResults];
+        //return resultDictionary;
         //});
-    //});
-    return resultDictionary;
+        //});
+        return resultDictionary;
+    
+        
+    }
+    else
+    {
+        //report error to user
+        UIAlertView* errorMessage;
+        [errorMessage initWithTitle:@"Error" message:@"Problem Connecting" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        [errorMessage show];
+        return 0;
+    }
 }
 
 - (void) processTorrentResults
@@ -500,6 +552,8 @@ NSMutableData* responseData;
 
 - (void)refreshPage:(id)sender
 {
+    
+    torrentListDictionary = [self getTorrentList];
     
     [self.tableView reloadData];
     

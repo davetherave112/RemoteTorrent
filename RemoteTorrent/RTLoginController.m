@@ -14,13 +14,13 @@
 
 @implementation RTLoginController
 
-NSString* ipAddress;
-NSString* port;
+//NSString* username;
+//NSString* password;
 
 //NSArray* credentialsArray;
 
-@synthesize ipAddressField;
-@synthesize portField;
+@synthesize usernameField;
+@synthesize passwordField;
 @synthesize staySignedOnSwitch;
 
 
@@ -49,10 +49,10 @@ NSString* port;
 
 - (IBAction)logInPressed:(id)sender {
     
-    ipAddress = ipAddressField.text;
-    port = portField.text;
+    //username = usernameField.text;
+    //password = passwordField.text;
     
-    NSArray *credentialsArray = [NSArray arrayWithObjects:ipAddressField.text, portField.text, nil];
+    NSArray *credentialsArray = [NSArray arrayWithObjects:usernameField.text, passwordField.text, [NSNumber numberWithBool:staySignedOnSwitch.on], nil];
     
     
     [self.delegate loginToBittorrent:self didEnterCredentials:credentialsArray];

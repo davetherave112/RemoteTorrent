@@ -17,15 +17,12 @@
 
 @property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 @property (strong, nonatomic) NSManagedObjectContext *managedObjectContext;
-@property (strong, nonatomic) NSString *ipAddress;
-@property (strong, nonatomic) NSString *port;
+@property (strong, nonatomic) NSString *username;
+@property (strong, nonatomic) NSString *password;
+//@property (nonatomic) BOOL rememberLogin;
+
 
 @property (assign, nonatomic) BOOL loggedIn;
 
 
-/*
-@property (strong, nonatomic) IBOutlet UITextField *ipAddressField;
-@property (strong, nonatomic) IBOutlet UITextField *portField;
-@property (strong, nonatomic) IBOutlet UISwitch *staySignedOnSwitch;
-*/
 @end
