@@ -224,31 +224,139 @@ NSUserDefaults *defaults;
 	// Configure the cell:
 	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
     NSString *abbrevTitle = [[title substringToIndex:19] stringByAppendingString:@"..."];
-    
+    //NSString *abbrevTitle = title;
     NSNumber *progress = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
     //NSString *percentDoneString = [NSString stringWithFormat:@"%@", progress];
 
     NSDecimalNumber *percentDone = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"10"]];
     NSString *percentDoneString = [NSString stringWithFormat:@"%@%%", percentDone];
     
-    NSDecimalNumber *percentDoneZeroToOne = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"100"]];
+    NSDecimalNumber *percentDoneZeroToOne = [[NSDecimalNumber decimalNumberWithDecimal:[progress decimalValue]] decimalNumberByDividingBy:[NSDecimalNumber decimalNumberWithString:@"1000"]];
     
-	cell.textLabel.text = abbrevTitle;
-    cell.detailTextLabel.text = percentDoneString;
+    
+    NSNumber *status = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:1]; //STATUS is located at index 1    
+    NSInteger statusInt = status.integerValue;
+    
+    NSNumber *ETA = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:10]; //ETA is located at index 10
+    NSInteger ETAMinutes = (ETA.integerValue)/60;
+
+    NSNumber *downloaded = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:5]; //DOWNLOADED is located at index 5
+    NSInteger downloadedMB = (downloaded.integerValue)/1000000;
+    
+    NSNumber *uploaded = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:6]; //UPLOADED is located at index 6
+    NSInteger uploadedMB = (uploaded.integerValue)/1000000;
+    
+    NSNumber *size = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:3]; //SIZE is located at index 3
+    NSInteger sizeMB = (size.integerValue)/1000000;
+    
+    
+    NSInteger startedStatus = 1;
+    NSInteger checkingStatus = 2;
+    NSInteger startAfterCheckStatus = 4;
+    NSInteger checkedStatus = 8;
+    NSInteger errorStatus = 16;
+    NSInteger pausedStatus = 32;
+    NSInteger queuedStatus = 64;
+    NSInteger loadedStatus = 128;
+    
+    NSInteger finishedStatus = loadedStatus + checkedStatus;
+    NSInteger seedingStatus;
+
+    
+    
+    
+    UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 0.0, 300.0, 30.0)];
+    [nameLabel setTag:1];
+    [nameLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [nameLabel setFont:[UIFont boldSystemFontOfSize:17.0]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:nameLabel];
+    [(UILabel *)[cell.contentView viewWithTag:1] setText:abbrevTitle];
+     
+
+    UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 20.0, 300.0, 30.0)];
+    [statusLabel setTag:2];
+    [statusLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [statusLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [statusLabel setTextColor:[UIColor grayColor]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:statusLabel];
+    
+    UIColor* progressBarColor = [UIColor blueColor];
+    
+    if (statusInt & pausedStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Paused"];
+    }
+    else if (statusInt & finishedStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Finished"];
+        progressBarColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.596 alpha:1.0]; //Bittorrent purple color
+    }
+    else if (statusInt & seedingStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Seeding"];
+        progressBarColor = [UIColor blueColor];
+        
+    }
+    if (statusInt & errorStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Error"];
+        progressBarColor = [UIColor redColor];
+
+    }
+    
+    
+	//cell.textLabel.text = abbrevTitle;
+    //cell.detailTextLabel.text = percentDoneString;
     
     
     
 
-    /*
-    UIProgressView* torrentProgressBar;
-    [torrentProgressBar initWithProgressViewStyle:UIProgressViewStyleBar];
-    torrentProgressBar.frame = CGRectMake(10, 10, 30, 30);
+    UIProgressView *torrentProgressBar = [[UIProgressView alloc] initWithProgressViewStyle:UIProgressViewStyleDefault];
     torrentProgressBar.progress = [percentDoneZeroToOne floatValue];
-    
-    torrentProgressBar.center = CGPointMake(23,21);
-    
+    torrentProgressBar.frame = CGRectMake(20, 70, 200, 30);
+    torrentProgressBar.progressTintColor = progressBarColor;
+    //torrentProgressBar.center = CGPointMake(23,21);
     [cell.contentView addSubview:torrentProgressBar];
-	*/
+    
+    UILabel *progressLabel = [[UILabel alloc] initWithFrame:CGRectMake(230.0, 57.0, 50.0, 30.0)];
+    [progressLabel setTag:6];
+    [progressLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [progressLabel setFont:[UIFont boldSystemFontOfSize:17.0]];
+    [progressLabel setTextColor:[UIColor grayColor]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:progressLabel];
+    [(UILabel *)[cell.contentView viewWithTag:6] setText:percentDoneString];
+    
+    UILabel *ETALabel = [[UILabel alloc] initWithFrame:CGRectMake(180.0, 20.0, 300.0, 30.0)];
+    [ETALabel setTag:3];
+    [ETALabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [ETALabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [ETALabel setTextColor:[UIColor grayColor]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:ETALabel];
+    [(UILabel *)[cell.contentView viewWithTag:3] setText:[[@"ETA: " stringByAppendingString:[NSString stringWithFormat:@"%d", ETAMinutes]] stringByAppendingString:@" minutes"]];
+    
+    
+    UILabel *downloadedLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 35.0, 300.0, 30.0)];
+    [downloadedLabel setTag:4];
+    [downloadedLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [downloadedLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [downloadedLabel setTextColor:[UIColor grayColor]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:downloadedLabel];
+    [(UILabel *)[cell.contentView viewWithTag:4] setText:[[@"D: " stringByAppendingString:[NSString stringWithFormat:@"%d", downloadedMB]] stringByAppendingString:[@" MB out of " stringByAppendingString:[[NSString stringWithFormat:@"%d", sizeMB] stringByAppendingString:@" MB"]]]];
+    
+    UILabel *uploadedLabel = [[UILabel alloc] initWithFrame:CGRectMake(180.0, 35.0, 300.0, 30.0)];
+    [uploadedLabel setTag:5];
+    [uploadedLabel setBackgroundColor:[UIColor clearColor]]; // transparent label background
+    [uploadedLabel setFont:[UIFont boldSystemFontOfSize:12.0]];
+    [uploadedLabel setTextColor:[UIColor grayColor]];
+    // custom views should be added as subviews of the cell's contentView:
+    [cell.contentView addSubview:uploadedLabel];
+    [(UILabel *)[cell.contentView viewWithTag:5] setText:[[@"U: " stringByAppendingString:[NSString stringWithFormat:@"%d", uploadedMB]] stringByAppendingString:@" MB"]];
+	
     
     return cell;
     
@@ -268,7 +376,7 @@ NSUserDefaults *defaults;
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    return 66.0f;
+    return 88.0f;
 }
 /*
 - (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
