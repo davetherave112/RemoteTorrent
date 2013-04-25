@@ -58,9 +58,29 @@
     [self.delegate loginToBittorrent:self didEnterCredentials:credentialsArray];
     
 }
+- (IBAction)logInButtonPressed:(id)sender {
+    
+    NSArray *credentialsArray = [NSArray arrayWithObjects:usernameField.text, passwordField.text, [NSNumber numberWithBool:staySignedOnSwitch.on], nil];
+    
+    
+    [self.delegate loginToBittorrent:self didEnterCredentials:credentialsArray];
+}
 - (IBAction)loginCancel:(id)sender {
     
     [self dismissViewControllerAnimated:YES completion:nil];
+}
+
+- (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [textField resignFirstResponder];
+    return YES;
+}
+
+// Dismiss keyboard when touching elsewhere on screen
+- (void)touchesEnded: (NSSet *)touches withEvent: (UIEvent *)event {
+    for (UIView* view in self.view.subviews) {
+        if ([view isKindOfClass:[UITextField class]])
+            [view resignFirstResponder];
+    }
 }
 
 @end

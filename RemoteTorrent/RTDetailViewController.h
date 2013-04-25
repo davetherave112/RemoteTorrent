@@ -8,9 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
-@interface RTDetailViewController : UIViewController
+@interface RTDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
-@property (strong, nonatomic) id detailItem;
+@property (strong, nonatomic) IBOutlet UITableView *tableView;
+@property (strong, nonatomic) NSArray *detailItem;
 
 @property (weak, nonatomic) IBOutlet UILabel *detailDescriptionLabel;
 @end

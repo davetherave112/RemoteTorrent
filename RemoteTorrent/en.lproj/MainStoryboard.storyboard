@@ -88,12 +88,6 @@
                                                 <action selector="loginCancel:" destination="qv5-zV-nBe" id="cOh-w2-544"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" title="Login" id="dA2-pb-YIw">
-                                            <color key="tintColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            <connections>
-                                                <action selector="logInPressed:" destination="qv5-zV-nBe" id="5Pg-DC-RGa"/>
-                                            </connections>
-                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -103,19 +97,22 @@
                                     <constraint firstAttribute="height" constant="102" id="gQ2-W4-ZCQ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAE-1I-C9J">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAE-1I-C9J">
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="21q-jU-nGB"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="boldSystem" size="button"/>
+                                <color key="tintColor" red="0.25098039220000001" green="0.59999999999999998" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <state key="normal" title="Log In">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                    <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
                                 <state key="highlighted">
                                     <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 </state>
+                                <connections>
+                                    <action selector="logInButtonPressed:" destination="qv5-zV-nBe" eventType="touchUpInside" id="dr1-vf-RiS"/>
+                                </connections>
                             </button>
                             <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Password" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="TJ0-0L-R9B">
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
@@ -126,7 +123,7 @@
                                     <constraint firstAttribute="width" constant="155" id="fMc-pm-S02"/>
                                 </constraints>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
+                                <textInputTraits key="textInputTraits" autocorrectionType="no" enablesReturnKeyAutomatically="YES"/>
                             </textField>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Stay Signed In" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Jyq-qa-VlA">
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -143,17 +140,17 @@
                             <constraint firstAttribute="bottom" secondItem="uAE-1I-C9J" secondAttribute="bottom" constant="39" id="4P2-t5-a2u"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="trailing" secondItem="eYx-Wd-zqU" secondAttribute="trailing" type="default" id="59I-7U-2Yg"/>
                             <constraint firstItem="uAE-1I-C9J" firstAttribute="trailing" secondItem="TJ0-0L-R9B" secondAttribute="trailing" type="default" id="8GI-7N-KVu"/>
+                            <constraint firstItem="6jJ-26-JIU" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" constant="45" id="9XM-Bd-9Pj"/>
                             <constraint firstItem="q4H-pa-iQP" firstAttribute="centerX" secondItem="vq7-XU-1lf" secondAttribute="centerX" type="default" id="IJs-e1-e3o"/>
                             <constraint firstAttribute="bottom" secondItem="NMw-Ze-4dQ" secondAttribute="bottom" constant="129" id="Lw0-n7-YAc"/>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="leading" secondItem="uAE-1I-C9J" secondAttribute="leading" type="default" id="S03-xS-Hm4"/>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="centerY" secondItem="eYx-Wd-zqU" secondAttribute="centerY" type="default" id="WDD-Ot-YfC"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" type="default" id="XN2-ZS-6uL"/>
-                            <constraint firstItem="6jJ-26-JIU" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" constant="50" id="gou-xI-Whn"/>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="trailing" secondItem="q4H-pa-iQP" secondAttribute="trailing" type="default" id="hCx-eU-1Wq"/>
                             <constraint firstItem="Jyq-qa-VlA" firstAttribute="centerX" secondItem="TJ0-0L-R9B" secondAttribute="centerX" type="default" id="i7O-xi-Bzw"/>
+                            <constraint firstItem="6jJ-26-JIU" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" constant="59" id="oWg-U5-gvF"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" type="default" id="ojy-Ea-gQ9"/>
                             <constraint firstItem="NMw-Ze-4dQ" firstAttribute="centerX" secondItem="Jyq-qa-VlA" secondAttribute="centerX" type="default" id="qsA-5q-wwc"/>
-                            <constraint firstItem="q4H-pa-iQP" firstAttribute="top" secondItem="6jJ-26-JIU" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="tSU-Ts-nad"/>
                             <constraint firstAttribute="bottom" secondItem="Jyq-qa-VlA" secondAttribute="bottom" constant="169" id="xJA-Pp-UNO"/>
                             <constraint firstItem="q4H-pa-iQP" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" constant="179" id="yMs-D2-EaB"/>
                         </constraints>
@@ -187,7 +184,7 @@
                                 </view>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>
-                                    <segue destination="21" kind="push" trigger="accessoryAction" id="ZPq-TH-QbX"/>
+                                    <segue destination="21" kind="push" identifier="showTorrentDetail" trigger="accessoryAction" id="KPn-4d-szo"/>
                                 </connections>
                             </tableViewCell>
                         </prototypes>
@@ -226,26 +223,49 @@
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="ZuI-ff-VZy">
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" id="YKp-u4-Uth">
+                                    <tableViewCell contentMode="scaleToFill" selectionStyle="blue" indentationWidth="10" reuseIdentifier="FileCell" textLabel="EQt-Rg-guu" detailTextLabel="BpZ-HV-wJx" style="IBUITableViewCellStyleSubtitle" id="YKp-u4-Uth">
                                         <rect key="frame" x="0.0" y="22" width="320" height="44"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center">
                                             <rect key="frame" x="0.0" y="0.0" width="320" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Title" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="EQt-Rg-guu">
+                                                    <fontDescription key="fontDescription" type="boldSystem" pointSize="18"/>
+                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                                <label opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="left" text="Subtitle" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="BpZ-HV-wJx">
+                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                    <color key="textColor" red="0.50196078431372548" green="0.50196078431372548" blue="0.50196078431372548" alpha="1" colorSpace="calibratedRGB"/>
+                                                    <color key="highlightedColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </label>
+                                            </subviews>
                                             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         </view>
                                     </tableViewCell>
                                 </prototypes>
+                                <connections>
+                                    <outlet property="dataSource" destination="21" id="MS6-wq-oIH"/>
+                                    <outlet property="delegate" destination="21" id="LWo-FX-JDz"/>
+                                </connections>
                             </tableView>
+                            <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiQ-og-PJL">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="27" firstAttribute="centerY" secondItem="22" secondAttribute="centerY" type="default" id="7cE-gL-0wv"/>
                             <constraint firstItem="acM-LE-3CW" firstAttribute="leading" secondItem="22" secondAttribute="leading" type="default" id="DDY-ni-xrD"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="leading" secondItem="22" secondAttribute="leading" type="default" id="DwW-FG-VMN"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="top" secondItem="22" secondAttribute="top" constant="20" symbolic="YES" type="default" id="FjF-6W-fjk"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="trailing" secondItem="22" secondAttribute="trailing" type="default" id="Lb1-Ta-J1B"/>
                             <constraint firstItem="27" firstAttribute="leading" secondItem="22" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="R0m-z7-TWk"/>
                             <constraint firstItem="acM-LE-3CW" firstAttribute="trailing" secondItem="22" secondAttribute="trailing" type="default" id="STj-Rh-sXj"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="centerX" secondItem="27" secondAttribute="centerX" type="default" id="gAj-MN-LRk"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="bottom" secondItem="acM-LE-3CW" secondAttribute="top" type="default" id="i2R-mw-jlP"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="top" secondItem="27" secondAttribute="top" type="default" id="lhP-l1-VCy"/>
                             <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="pRe-qY-58T"/>
@@ -255,6 +275,7 @@
                     <navigationItem key="navigationItem" title="Torrent Details" id="26"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="27" id="28"/>
+                        <outlet property="tableView" destination="ZuI-ff-VZy" id="4sE-My-INI"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" sceneMemberID="firstResponder"/>
@@ -265,34 +286,6 @@
     <resources>
         <image name="bittorrent-logo-purple.png" width="1200" height="512"/>
     </resources>
-    <classes>
-        <class className="NSLayoutConstraint" superclassName="NSObject">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/NSLayoutConstraint.h"/>
-        </class>
-        <class className="RTAddTorrentViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTAddTorrentViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="torrentURL" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RTDetailViewController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTDetailViewController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="detailDescriptionLabel" candidateClass="UILabel"/>
-            </relationships>
-        </class>
-        <class className="RTLoginController" superclassName="UIViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTLoginController.h"/>
-            <relationships>
-                <relationship kind="outlet" name="passwordField" candidateClass="UITextField"/>
-                <relationship kind="outlet" name="staySignedOnSwitch" candidateClass="UISwitch"/>
-                <relationship kind="outlet" name="usernameField" candidateClass="UITextField"/>
-            </relationships>
-        </class>
-        <class className="RTMasterViewController" superclassName="UITableViewController">
-            <source key="sourceIdentifier" type="project" relativePath="./Classes/RTMasterViewController.h"/>
-        </class>
-    </classes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>

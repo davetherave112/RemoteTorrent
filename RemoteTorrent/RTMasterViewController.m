@@ -223,7 +223,11 @@ NSUserDefaults *defaults;
     
 	// Configure the cell:
 	NSString *title = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:2]; //TITLE is located at index 2
-    NSString *abbrevTitle = [[title substringToIndex:19] stringByAppendingString:@"..."];
+    
+    if (title.length > 20)
+    {
+        title = [[title substringToIndex:19] stringByAppendingString:@"..."];
+    }
     //NSString *abbrevTitle = title;
     NSNumber *progress = [[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:4]; //PERCENT PROGRESS is located at index 4
     //NSString *percentDoneString = [NSString stringWithFormat:@"%@", progress];
@@ -261,6 +265,7 @@ NSUserDefaults *defaults;
     
     NSInteger finishedStatus = loadedStatus + checkedStatus;
     NSInteger seedingStatus;
+    NSInteger downloadingStatus = loadedStatus + queuedStatus + checkedStatus + startedStatus;
 
     
     
@@ -271,7 +276,7 @@ NSUserDefaults *defaults;
     [nameLabel setFont:[UIFont boldSystemFontOfSize:17.0]];
     // custom views should be added as subviews of the cell's contentView:
     [cell.contentView addSubview:nameLabel];
-    [(UILabel *)[cell.contentView viewWithTag:1] setText:abbrevTitle];
+    [(UILabel *)[cell.contentView viewWithTag:1] setText:title];
      
 
     UILabel *statusLabel = [[UILabel alloc] initWithFrame:CGRectMake(20.0, 20.0, 300.0, 30.0)];
@@ -282,11 +287,18 @@ NSUserDefaults *defaults;
     // custom views should be added as subviews of the cell's contentView:
     [cell.contentView addSubview:statusLabel];
     
-    UIColor* progressBarColor = [UIColor blueColor];
+    UIColor* progressBarColor = [UIColor clearColor];
     
     if (statusInt & pausedStatus)
     {
         [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Paused"];
+        progressBarColor = [UIColor yellowColor];
+    }
+    else if (statusInt == downloadingStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Downloading"];
+        progressBarColor = [UIColor greenColor];
+        
     }
     else if (statusInt & finishedStatus)
     {
@@ -299,6 +311,7 @@ NSUserDefaults *defaults;
         progressBarColor = [UIColor blueColor];
         
     }
+
     if (statusInt & errorStatus)
     {
         [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Error"];
@@ -409,13 +422,30 @@ NSUserDefaults *defaults;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showDetail"]) {
-        NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
-        NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        [[segue destinationViewController] setDetailItem:object];
+    if ([[segue identifier] isEqualToString:@"showTorrentDetail"])
+    {
+        //NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
+        
+        NSIndexPath *indexPath = [self.tableView indexPathForCell:sender];
+        
+        NSString* filesListURLString = [baseURLString stringByAppendingString:@"&action=getfiles&hash="];
+        filesListURLString = [filesListURLString stringByAppendingString:[[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:0]]; //HASH is at index 0
+        
+        // Perform BitTorrent API search:
+        
+        NSURL* filesListURL = [NSURL URLWithString: filesListURLString];
+               
+        NSData* responseData = [NSData dataWithContentsOfURL:filesListURL];
+        NSError* error = nil;
+        NSDictionary* fileListDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+        
+        NSArray* fileListArray = [[fileListDictionary objectForKey:@"files"] objectAtIndex:1]; //Pull array of file list out (it's at index 1, index 0 is the HASH)
+        
+        //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+        
+        [[segue destinationViewController] setDetailItem:fileListArray];
     }
 }
-
 
 
 
