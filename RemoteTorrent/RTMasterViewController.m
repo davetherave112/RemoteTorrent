@@ -64,9 +64,9 @@ NSUserDefaults *defaults;
     }
     else
     {
-        torrentListDictionary = [self getTorrentList];
+        [self getTorrentList];
         
-        [self.tableView reloadData];
+        //[self.tableView reloadData];
         //self.loggedIn = YES;
         
     }
@@ -89,12 +89,12 @@ NSUserDefaults *defaults;
     
     
     
-    NSArray *leftButtonArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
-    NSArray *rightButtonArray = [[NSArray alloc] initWithObjects: loginButton, refreshButton, removeButton, nil];
+    NSArray *leftButtonsArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
+    NSArray *rightButtonsArray = [[NSArray alloc] initWithObjects: loginButton, refreshButton, removeButton, nil];
 
 
-    self.navigationItem.leftBarButtonItems =leftButtonArray;
-    self.navigationItem.rightBarButtonItems = rightButtonArray;
+    self.navigationItem.leftBarButtonItems =leftButtonsArray;
+    self.navigationItem.rightBarButtonItems = rightButtonsArray;
     
     
     
@@ -135,7 +135,7 @@ NSUserDefaults *defaults;
     {
         [defaults setObject:self.username forKey:@"username"];
         [defaults setObject:self.password forKey:@"password"];
-        //[defaults setBool:self.rememberLogin forKey:@"remember_login"];
+        [defaults setBool:rememberLogin forKey:@"remember_login"];
         
     }
     else
@@ -148,9 +148,9 @@ NSUserDefaults *defaults;
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    torrentListDictionary = [self getTorrentList];
+    [self getTorrentList];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 
     
 }
@@ -160,26 +160,6 @@ NSUserDefaults *defaults;
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-/*
-- (void)insertNewObject:(id)sender
-{
-    NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-    NSEntityDescription *entity = [[self.fetchedResultsController fetchRequest] entity];
-    NSManagedObject *newManagedObject = [NSEntityDescription insertNewObjectForEntityForName:[entity name] inManagedObjectContext:context];
-    
-    // If appropriate, configure the new managed object.
-    // Normally you should use accessor methods, but using KVC here avoids the need to add a custom class to the template.
-    [newManagedObject setValue:[NSDate date] forKey:@"timeStamp"];
-    
-    // Save the context.
-    NSError *error = nil;
-    if (![context save:&error]) {
-         // Replace this implementation with code to handle the error appropriately.
-         // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-        NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-        abort();
-    }
-}*/
 
 #pragma mark - Table View
 
@@ -264,7 +244,7 @@ NSUserDefaults *defaults;
     NSInteger loadedStatus = 128;
     
     NSInteger finishedStatus = loadedStatus + checkedStatus;
-    NSInteger seedingStatus;
+    NSInteger seedingStatus = 0;
     NSInteger downloadingStatus = loadedStatus + queuedStatus + checkedStatus + startedStatus;
 
     
@@ -391,34 +371,6 @@ NSUserDefaults *defaults;
 {
     return 88.0f;
 }
-/*
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // Return NO if you do not want the specified item to be editable.
-    return NO;
-}
-
-- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    if (editingStyle == UITableViewCellEditingStyleDelete) {
-        NSManagedObjectContext *context = [self.fetchedResultsController managedObjectContext];
-        [context deleteObject:[self.fetchedResultsController objectAtIndexPath:indexPath]];
-        
-        NSError *error = nil;
-        if (![context save:&error]) {
-             // Replace this implementation with code to handle the error appropriately.
-             // abort() causes the application to generate a crash log and terminate. You should not use this function in a shipping application, although it may be useful during development. 
-            NSLog(@"Unresolved error %@, %@", error, [error userInfo]);
-            abort();
-        }
-    }   
-}
-
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath
-{
-    // The table view should not be re-orderable.
-    return NO;
-}*/
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
@@ -432,18 +384,28 @@ NSUserDefaults *defaults;
         filesListURLString = [filesListURLString stringByAppendingString:[[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:0]]; //HASH is at index 0
         
         // Perform BitTorrent API search:
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            
+            NSURL* filesListURL = [NSURL URLWithString: filesListURLString];
+            
+            NSData* responseData = [NSData dataWithContentsOfURL:filesListURL];
+            NSError* error = nil;
+            NSDictionary* fileListDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                
+                NSArray* fileListArray = [[fileListDictionary objectForKey:@"files"] objectAtIndex:1]; //Pull array of file list out (it's at index 1, index 0 is the HASH)
+                
+                //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
+                
+                [[segue destinationViewController] setDetailItem:fileListArray];
+                [(RTDetailViewController*)segue.destinationViewController configureView];
+                
+                
+            });
+            
+        });
         
-        NSURL* filesListURL = [NSURL URLWithString: filesListURLString];
-               
-        NSData* responseData = [NSData dataWithContentsOfURL:filesListURL];
-        NSError* error = nil;
-        NSDictionary* fileListDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error];
-        
-        NSArray* fileListArray = [[fileListDictionary objectForKey:@"files"] objectAtIndex:1]; //Pull array of file list out (it's at index 1, index 0 is the HASH)
-        
-        //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
-        
-        [[segue destinationViewController] setDetailItem:fileListArray];
     }
 }
 
@@ -465,14 +427,8 @@ NSUserDefaults *defaults;
     [self.tableView reloadData];
 }
  */
-/*
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath
-{
-    NSManagedObject *object = [self.fetchedResultsController objectAtIndexPath:indexPath];
-    cell.textLabel.text = [[object valueForKey:@"timeStamp"] description];
-}*/
 
-- (NSDictionary*)getTorrentList
+- (void)getTorrentList
 {
     //NSDictionary* resultDictionary;
     
@@ -532,27 +488,31 @@ NSUserDefaults *defaults;
         NSString* searchURL = [baseURLString stringByAppendingString:@"&list=1"];
         
         // Perform BitTorrent API search:
-        //dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         
-        NSURL* url = [NSURL URLWithString: searchURL];
-        //NSString* user = [url user];
-        //NSString* pass = [url password];
+            NSURL* url = [NSURL URLWithString: searchURL];
         
-        NSData* responseData = [NSData dataWithContentsOfURL:url];
-        NSError* error2 = nil;
-        resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
+            NSData* responseData = [NSData dataWithContentsOfURL:url];
+            NSError* error2 = nil;
+            resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
         /*
          NSError* err = nil;
          NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString: searchURL] encoding:NSUTF8StringEncoding  error:&err];
          NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:searchURL]];
          //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
          */
-        //dispatch_async(dispatch_get_main_queue(), ^{
-        [self processTorrentResults];
+            
+        
+            dispatch_async(dispatch_get_main_queue(), ^{
+        
+                [self processTorrentResults];
+        
+                [self.tableView reloadData];
+        
+                });
+        
+                });
         //return resultDictionary;
-        //});
-        //});
-        return resultDictionary;
     
         
     }
@@ -562,7 +522,6 @@ NSUserDefaults *defaults;
         UIAlertView* errorMessage;
         [errorMessage initWithTitle:@"Error" message:@"Problem Connecting" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
         [errorMessage show];
-        return 0;
     }
 }
 
@@ -691,9 +650,9 @@ NSUserDefaults *defaults;
 - (void)refreshPage:(id)sender
 {
     
-    torrentListDictionary = [self getTorrentList];
+    [self getTorrentList];
     
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
     
 }
 

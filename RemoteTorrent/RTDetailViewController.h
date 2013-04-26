@@ -10,6 +10,10 @@
 
 @interface RTDetailViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
 
+
+- (void)configureView;
+
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 @property (strong, nonatomic) NSArray *detailItem;
 

@@ -97,7 +97,7 @@
                                     <constraint firstAttribute="height" constant="102" id="gQ2-W4-ZCQ"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAE-1I-C9J">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uAE-1I-C9J">
                                 <color key="backgroundColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="52" id="21q-jU-nGB"/>
@@ -133,29 +133,34 @@
                             <switch opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="NMw-Ze-4dQ">
                                 <color key="onTintColor" red="0.40000000000000002" green="0.20000000000000001" blue="0.59607843140000005" alpha="1" colorSpace="calibratedRGB"/>
                             </switch>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" hidesWhenStopped="YES" style="whiteLarge" translatesAutoresizingMaskIntoConstraints="NO" id="H1G-le-0oq"/>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="leading" secondItem="q4H-pa-iQP" secondAttribute="leading" type="default" id="1gX-Jl-3Il"/>
-                            <constraint firstAttribute="bottom" secondItem="uAE-1I-C9J" secondAttribute="bottom" constant="39" id="4P2-t5-a2u"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="trailing" secondItem="eYx-Wd-zqU" secondAttribute="trailing" type="default" id="59I-7U-2Yg"/>
-                            <constraint firstItem="uAE-1I-C9J" firstAttribute="trailing" secondItem="TJ0-0L-R9B" secondAttribute="trailing" type="default" id="8GI-7N-KVu"/>
                             <constraint firstItem="6jJ-26-JIU" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" constant="45" id="9XM-Bd-9Pj"/>
+                            <constraint firstItem="Jyq-qa-VlA" firstAttribute="top" secondItem="TJ0-0L-R9B" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="DWq-2e-NOv"/>
+                            <constraint firstItem="uAE-1I-C9J" firstAttribute="trailing" secondItem="TJ0-0L-R9B" secondAttribute="trailing" type="default" id="Deg-hl-hKi"/>
+                            <constraint firstAttribute="trailing" secondItem="H1G-le-0oq" secondAttribute="trailing" constant="88" id="F83-Cf-jlr"/>
                             <constraint firstItem="q4H-pa-iQP" firstAttribute="centerX" secondItem="vq7-XU-1lf" secondAttribute="centerX" type="default" id="IJs-e1-e3o"/>
-                            <constraint firstAttribute="bottom" secondItem="NMw-Ze-4dQ" secondAttribute="bottom" constant="129" id="Lw0-n7-YAc"/>
-                            <constraint firstItem="TJ0-0L-R9B" firstAttribute="leading" secondItem="uAE-1I-C9J" secondAttribute="leading" type="default" id="S03-xS-Hm4"/>
+                            <constraint firstAttribute="bottom" secondItem="uAE-1I-C9J" secondAttribute="bottom" constant="60" id="VL7-Tc-dup"/>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="centerY" secondItem="eYx-Wd-zqU" secondAttribute="centerY" type="default" id="WDD-Ot-YfC"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" type="default" id="XN2-ZS-6uL"/>
+                            <constraint firstItem="H1G-le-0oq" firstAttribute="centerY" secondItem="uAE-1I-C9J" secondAttribute="centerY" type="default" id="aNW-yV-x3h"/>
+                            <constraint firstItem="NMw-Ze-4dQ" firstAttribute="top" secondItem="Jyq-qa-VlA" secondAttribute="bottom" constant="8" symbolic="YES" type="default" id="adl-0r-fp2"/>
+                            <constraint firstItem="uAE-1I-C9J" firstAttribute="leading" secondItem="TJ0-0L-R9B" secondAttribute="leading" type="default" id="bsb-Sv-Ak2"/>
                             <constraint firstItem="TJ0-0L-R9B" firstAttribute="trailing" secondItem="q4H-pa-iQP" secondAttribute="trailing" type="default" id="hCx-eU-1Wq"/>
                             <constraint firstItem="Jyq-qa-VlA" firstAttribute="centerX" secondItem="TJ0-0L-R9B" secondAttribute="centerX" type="default" id="i7O-xi-Bzw"/>
                             <constraint firstItem="6jJ-26-JIU" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" constant="59" id="oWg-U5-gvF"/>
                             <constraint firstItem="vq7-XU-1lf" firstAttribute="leading" secondItem="eYx-Wd-zqU" secondAttribute="leading" type="default" id="ojy-Ea-gQ9"/>
                             <constraint firstItem="NMw-Ze-4dQ" firstAttribute="centerX" secondItem="Jyq-qa-VlA" secondAttribute="centerX" type="default" id="qsA-5q-wwc"/>
-                            <constraint firstAttribute="bottom" secondItem="Jyq-qa-VlA" secondAttribute="bottom" constant="169" id="xJA-Pp-UNO"/>
                             <constraint firstItem="q4H-pa-iQP" firstAttribute="top" secondItem="eYx-Wd-zqU" secondAttribute="top" constant="179" id="yMs-D2-EaB"/>
                         </constraints>
                     </view>
                     <connections>
+                        <outlet property="loginActivity" destination="H1G-le-0oq" id="F5i-iN-tiX"/>
+                        <outlet property="loginButton" destination="uAE-1I-C9J" id="uXO-XM-Iik"/>
                         <outlet property="passwordField" destination="TJ0-0L-R9B" id="lnj-J2-ypA"/>
                         <outlet property="staySignedOnSwitch" destination="NMw-Ze-4dQ" id="YU4-0x-b17"/>
                         <outlet property="usernameField" destination="q4H-pa-iQP" id="s3Q-Fb-WCz"/>

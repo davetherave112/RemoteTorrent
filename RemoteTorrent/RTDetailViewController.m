@@ -37,6 +37,9 @@ NSArray* fileList;
         
         fileList = self.detailItem;
         
+        [self.tableView reloadData];
+
+        
     }
 }
 
@@ -65,8 +68,16 @@ NSArray* fileList;
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //NSArray* temp = [fileList objectAtIndex:1];
-    return fileList.count;
+    
+    if (self.detailItem)
+    {
+        //NSArray* temp = [fileList objectAtIndex:1];
+        return fileList.count;
+    }
+    else
+    {
+        return 0;
+    }
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section
@@ -89,7 +100,7 @@ NSArray* fileList;
 	// Configure the cell:
 	NSArray *fileProperties = [fileList objectAtIndex:indexPath.row];
     NSString *title = [fileProperties objectAtIndex:0]; //FILE NAME is located at index 0
-    NSString *abbrevTitle = [[title substringToIndex:19] stringByAppendingString:@"..."];
+    //NSString *abbrevTitle = [[title substringToIndex:19] stringByAppendingString:@"..."];
     //NSString *abbrevTitle = title;
     NSNumber *size = [fileProperties objectAtIndex:1]; //FILE SIZE is located at index 1
     NSNumber *downloaded = [fileProperties objectAtIndex:2]; //DOWNLOADED is located at index 2

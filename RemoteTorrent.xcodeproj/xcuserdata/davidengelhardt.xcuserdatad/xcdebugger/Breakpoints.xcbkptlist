@@ -21,11 +21,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "514"
-         endingLineNumber = "514"
+         startingLineNumber = "468"
+         endingLineNumber = "468"
          landmarkName = "-getTorrentList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -34,11 +34,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "507"
-         endingLineNumber = "507"
+         startingLineNumber = "461"
+         endingLineNumber = "461"
          landmarkName = "-getTorrentList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -47,24 +47,24 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "572"
-         endingLineNumber = "572"
+         startingLineNumber = "531"
+         endingLineNumber = "531"
          landmarkName = "-processTorrentResults"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
-         shouldBeEnabled = "No"
+         shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "500"
-         endingLineNumber = "500"
+         startingLineNumber = "454"
+         endingLineNumber = "454"
          landmarkName = "-getTorrentList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -73,11 +73,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "505"
-         endingLineNumber = "505"
+         startingLineNumber = "459"
+         endingLineNumber = "459"
          landmarkName = "-getTorrentList"
          landmarkType = "5">
       </FileBreakpoint>
@@ -86,11 +86,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388300707.640271"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "225"
-         endingLineNumber = "225"
+         startingLineNumber = "205"
+         endingLineNumber = "205"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -99,11 +99,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "235"
-         endingLineNumber = "235"
+         startingLineNumber = "215"
+         endingLineNumber = "215"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -112,11 +112,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "694"
-         endingLineNumber = "694"
+         startingLineNumber = "653"
+         endingLineNumber = "653"
          landmarkName = "-refreshPage:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -125,11 +125,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "385"
-         endingLineNumber = "385"
+         startingLineNumber = "365"
+         endingLineNumber = "365"
          landmarkName = "-tableView:didSelectRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -138,11 +138,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "622"
-         endingLineNumber = "622"
+         startingLineNumber = "581"
+         endingLineNumber = "581"
          landmarkName = "-removeTorrent:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -177,11 +177,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "594"
-         endingLineNumber = "594"
+         startingLineNumber = "553"
+         endingLineNumber = "553"
          landmarkName = "-addNewTorrent:didEnterTorrentURL:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -190,11 +190,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "453"
-         endingLineNumber = "453"
+         startingLineNumber = "413"
+         endingLineNumber = "413"
          landmarkName = "@implementation RTMasterViewController"
          landmarkType = "3">
       </FileBreakpoint>
@@ -203,11 +203,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388300707.640271"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "199"
-         endingLineNumber = "199"
+         startingLineNumber = "179"
+         endingLineNumber = "179"
          landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -216,11 +216,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "333"
-         endingLineNumber = "333"
+         startingLineNumber = "313"
+         endingLineNumber = "313"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -255,11 +255,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "329"
-         endingLineNumber = "329"
+         startingLineNumber = "309"
+         endingLineNumber = "309"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -268,11 +268,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "241"
-         endingLineNumber = "241"
+         startingLineNumber = "221"
+         endingLineNumber = "221"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -294,11 +294,11 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "425"
-         endingLineNumber = "425"
+         startingLineNumber = "377"
+         endingLineNumber = "377"
          landmarkName = "-prepareForSegue:sender:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -320,24 +320,50 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTDetailViewController.m"
-         timestampString = "388451694.670624"
+         timestampString = "388638685.123765"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "45"
-         endingLineNumber = "45"
+         startingLineNumber = "48"
+         endingLineNumber = "48"
          landmarkName = "-viewDidLoad"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "RemoteTorrent/RTDetailViewController.m"
+         timestampString = "388638685.123765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "103"
+         endingLineNumber = "103"
+         landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "No"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "RemoteTorrent/RTDetailViewController.m"
-         timestampString = "388472291.467297"
+         filePath = "RemoteTorrent/RTLoginController.m"
+         timestampString = "388634754.997427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "92"
-         endingLineNumber = "92"
+         startingLineNumber = "89"
+         endingLineNumber = "89"
+         landmarkName = "@implementation RTLoginController"
+         landmarkType = "3">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "RemoteTorrent/RTDetailViewController.m"
+         timestampString = "388638685.123765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "101"
+         endingLineNumber = "101"
          landmarkName = "-tableView:cellForRowAtIndexPath:"
          landmarkType = "5">
       </FileBreakpoint>
@@ -346,12 +372,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388635678.425816"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "438"
-         endingLineNumber = "438"
+         startingLineNumber = "379"
+         endingLineNumber = "379"
          landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "RemoteTorrent/RTLoginController.m"
+         timestampString = "388634754.997427"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "70"
+         endingLineNumber = "70"
+         landmarkName = "-logInButtonPressed:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -359,25 +398,38 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTLoginController.m"
-         timestampString = "388519996.428471"
+         timestampString = "388634754.997427"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "74"
-         endingLineNumber = "74"
-         landmarkName = "-textFieldShouldReturn:"
+         startingLineNumber = "67"
+         endingLineNumber = "67"
+         landmarkName = "-logInButtonPressed:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
          shouldBeEnabled = "Yes"
          ignoreCount = "0"
          continueAfterRunningActions = "No"
-         filePath = "RemoteTorrent/RTDetailViewController.m"
-         timestampString = "388534457.635332"
+         filePath = "RemoteTorrent/RTMasterViewController.m"
+         timestampString = "388618714.517621"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "90"
-         endingLineNumber = "90"
-         landmarkName = "-tableView:cellForRowAtIndexPath:"
+         startingLineNumber = "130"
+         endingLineNumber = "130"
+         landmarkName = "-loginToBittorrent:didEnterCredentials:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "No"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "RemoteTorrent/RTDetailViewController.m"
+         timestampString = "388638685.123765"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "74"
+         endingLineNumber = "74"
+         landmarkName = "-tableView:numberOfRowsInSection:"
          landmarkType = "5">
       </FileBreakpoint>
       <FileBreakpoint
@@ -385,12 +437,25 @@
          ignoreCount = "0"
          continueAfterRunningActions = "No"
          filePath = "RemoteTorrent/RTMasterViewController.m"
-         timestampString = "388557386.237891"
+         timestampString = "388683571.479211"
          startingColumnNumber = "9223372036854775807"
          endingColumnNumber = "9223372036854775807"
-         startingLineNumber = "427"
-         endingLineNumber = "427"
+         startingLineNumber = "402"
+         endingLineNumber = "402"
          landmarkName = "-prepareForSegue:sender:"
+         landmarkType = "5">
+      </FileBreakpoint>
+      <FileBreakpoint
+         shouldBeEnabled = "Yes"
+         ignoreCount = "0"
+         continueAfterRunningActions = "No"
+         filePath = "RemoteTorrent/RTMasterViewController.m"
+         timestampString = "388692383.47171"
+         startingColumnNumber = "9223372036854775807"
+         endingColumnNumber = "9223372036854775807"
+         startingLineNumber = "521"
+         endingLineNumber = "521"
+         landmarkName = "-getTorrentList"
          landmarkType = "5">
       </FileBreakpoint>
    </FileBreakpoints>
