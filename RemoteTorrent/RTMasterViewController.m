@@ -26,6 +26,7 @@ NSArray* torrentListArray;
 NSArray* selectedTorrent;
 
 NSString* baseURLString = @"http://";
+NSString* searchURL;
 
 
 NSMutableData* responseData;
@@ -64,7 +65,7 @@ NSUserDefaults *defaults;
     }
     else
     {
-        [self getTorrentList];
+        [self prepareToGetTorrents];
         
         //[self.tableView reloadData];
         //self.loggedIn = YES;
@@ -90,7 +91,7 @@ NSUserDefaults *defaults;
     
     
     NSArray *leftButtonsArray = [[NSArray alloc] initWithObjects:addButton, resumeButton, pauseButton, nil];
-    NSArray *rightButtonsArray = [[NSArray alloc] initWithObjects: loginButton, refreshButton, removeButton, nil];
+    NSArray *rightButtonsArray = [[NSArray alloc] initWithObjects: loginButton, removeButton, refreshButton, nil];
 
 
     self.navigationItem.leftBarButtonItems =leftButtonsArray;
@@ -148,7 +149,7 @@ NSUserDefaults *defaults;
     
     [self dismissViewControllerAnimated:YES completion:nil];
     
-    [self getTorrentList];
+    [self prepareToGetTorrents];
     
     //[self.tableView reloadData];
 
@@ -244,7 +245,7 @@ NSUserDefaults *defaults;
     NSInteger loadedStatus = 128;
     
     NSInteger finishedStatus = loadedStatus + checkedStatus;
-    NSInteger seedingStatus = 0;
+    //NSInteger seedingStatus = loadedStatus + queuedStatus + checkedStatus + startedStatus;
     NSInteger downloadingStatus = loadedStatus + queuedStatus + checkedStatus + startedStatus;
 
     
@@ -269,35 +270,36 @@ NSUserDefaults *defaults;
     
     UIColor* progressBarColor = [UIColor clearColor];
     
-    if (statusInt & pausedStatus)
+    if (statusInt & errorStatus)
+    {
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Error"];
+        progressBarColor = [UIColor redColor];
+        
+    }
+    else if (statusInt & pausedStatus)
     {
         [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Paused"];
         progressBarColor = [UIColor yellowColor];
     }
-    else if (statusInt == downloadingStatus)
+    else if (statusInt == (statusInt & downloadingStatus) && ([percentDone integerValue] < 100))
     {
         [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Downloading"];
         progressBarColor = [UIColor greenColor];
         
     }
-    else if (statusInt & finishedStatus)
-    {
-        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Finished"];
-        progressBarColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.596 alpha:1.0]; //Bittorrent purple color
-    }
-    else if (statusInt & seedingStatus)
+    else if ((statusInt == downloadingStatus) && ([percentDone integerValue] == 100))
     {
         [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Seeding"];
         progressBarColor = [UIColor blueColor];
         
     }
-
-    if (statusInt & errorStatus)
+    else if (statusInt == finishedStatus)
     {
-        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Error"];
-        progressBarColor = [UIColor redColor];
-
+        [(UILabel *)[cell.contentView viewWithTag:2] setText:@"Finished"];
+        progressBarColor = [UIColor colorWithRed:0.4 green:0.2 blue:0.596 alpha:1.0]; //Bittorrent purple color
     }
+
+    
     
     
 	//cell.textLabel.text = abbrevTitle;
@@ -428,8 +430,9 @@ NSUserDefaults *defaults;
 }
  */
 
-- (void)getTorrentList
+-(void)prepareToGetTorrents
 {
+    
     //NSDictionary* resultDictionary;
     
     
@@ -463,18 +466,19 @@ NSUserDefaults *defaults;
     NSURL *tokenURL = [NSURL URLWithString:tokenURLString];
     NSError *error;
     NSString *tokenPage = [NSString stringWithContentsOfURL:tokenURL
-                                                    encoding:NSASCIIStringEncoding
-                                                       error:&error];
+                                                   encoding:NSASCIIStringEncoding
+                                                      error:&error];
     
-
+    
     NSString* token;
     
-    if (!error) {
+    if (!error)
+    {
         
         NSScanner* tokenScanner = [NSScanner scannerWithString:tokenPage];
         [tokenScanner scanUpToString:@"'>" intoString:NULL];
         [tokenScanner scanUpToString:@"</div>" intoString:&token];
-    
+        
         self.loggedIn = YES;
         
         // home ip address
@@ -485,44 +489,48 @@ NSUserDefaults *defaults;
         baseURLString = [baseURLString stringByAppendingString:token];
         
         // Formulate BitTorrent API search URL:
-        NSString* searchURL = [baseURLString stringByAppendingString:@"&list=1"];
+        searchURL = [baseURLString stringByAppendingString:@"&list=1"];
         
-        // Perform BitTorrent API search:
-        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        
-            NSURL* url = [NSURL URLWithString: searchURL];
-        
-            NSData* responseData = [NSData dataWithContentsOfURL:url];
-            NSError* error2 = nil;
-            resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
-        /*
-         NSError* err = nil;
-         NSString *html = [NSString stringWithContentsOfURL:[NSURL URLWithString: searchURL] encoding:NSUTF8StringEncoding  error:&err];
-         NSDictionary *dictionary = [NSDictionary dictionaryWithContentsOfURL:[NSURL URLWithString:searchURL]];
-         //NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:searchURL]];
-         */
-            
-        
-            dispatch_async(dispatch_get_main_queue(), ^{
-        
-                [self processTorrentResults];
-        
-                [self.tableView reloadData];
-        
-                });
-        
-                });
-        //return resultDictionary;
-    
-        
+        [self getTorrentList];
+        NSTimer* pollTimer = [NSTimer scheduledTimerWithTimeInterval:5.0 target:self selector:@selector(continuousPoller:) userInfo:nil repeats:YES];
     }
     else
     {
         //report error to user
-        UIAlertView* errorMessage;
-        [errorMessage initWithTitle:@"Error" message:@"Problem Connecting" delegate:self cancelButtonTitle:@"Ok" otherButtonTitles: nil];
+        UIAlertView* errorMessage = [[UIAlertView alloc] initWithTitle:@"Error: There Was A Problem Connecting" message:@"Please Try Again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorMessage show];
     }
+    
+}
+
+- (void) continuousPoller:(NSTimer*)theTimer
+{
+    
+    [self getTorrentList];
+    
+}
+
+
+- (void)getTorrentList
+{
+        
+    
+    // Perform BitTorrent API search:
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        
+        NSURL* url = [NSURL URLWithString: searchURL];
+        
+        NSData* responseData = [NSData dataWithContentsOfURL:url];
+        NSError* error2 = nil;
+        resultDictionary = [NSJSONSerialization JSONObjectWithData:responseData options:kNilOptions error:&error2];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            
+            [self processTorrentResults];
+            [self.tableView reloadData];
+        });
+    });
+        //return resultDictionary;
 }
 
 - (void) processTorrentResults
