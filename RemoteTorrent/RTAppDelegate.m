@@ -12,17 +12,71 @@
 
 @implementation RTAppDelegate
 
+
 @synthesize managedObjectContext = _managedObjectContext;
 @synthesize managedObjectModel = _managedObjectModel;
 @synthesize persistentStoreCoordinator = _persistentStoreCoordinator;
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+    
     // Override point for customization after application launch.
     UINavigationController *navigationController = (UINavigationController *)self.window.rootViewController;
     RTMasterViewController *controller = (RTMasterViewController *)navigationController.topViewController;
     controller.managedObjectContext = self.managedObjectContext;
+    
+    /*
+    // link to dropbox
+    DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"plux600vsa0m31f" secret:@"eezgie3mgcbs5oo"];
+    [DBAccountManager setSharedManager:accountMgr];
+    
+    // initialize view controller
+    FileViewController *fvc = [FileViewController new];
+    //RTMasterViewController *mvc = [RTMasterViewController new];
+    
+    // see if there's a linked account
+    DBAccount *account = [accountMgr.linkedAccounts objectAtIndex:0];
+	if (account) { // if so
+        // pass the info to the view controller
+		DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+		fvc = [[FileViewController alloc] initWithFilesystem:filesystem root:[DBPath root]];
+	}
+    else // otherwise initialize it empty
+        fvc = [FileViewController new];
+    /*
+    NSMutableArray *initialControllers = [NSMutableArray arrayWithObject:fvc];
+    
+    // initialize navigation controller with our proper view controller
+    UITabBarController *tabBarController = [UITabBarController new];
+	tabBarController.viewControllers = initialControllers;
+    
+    // set the root controller and root view
+	self.rootController = tabBarController;
+	self.window.rootViewController = tabBarController;
+
+     */
+    
+    
+    
     return YES;
+}
+
+- (BOOL)application:(UIApplication *)app openURL:(NSURL *)url sourceApplication:(NSString *)source annotation:(id)annotation
+{
+    DBAccount *account = [[DBAccountManager sharedManager] handleOpenURL:url];
+    
+    if (account) { // linked sucessfully
+        // initialize the filesystem
+        DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+        [DBFilesystem setSharedFilesystem:filesystem];
+        
+        // update the viewcontroller with the appropriate root and filesystem
+        FileViewController *fvc = [self.rootController.viewControllers objectAtIndex:0];
+        fvc = [fvc initWithFilesystem:filesystem root:[DBPath root]];
+        
+        return YES;
+    }
+    return NO;
 }
 							
 - (void)applicationWillResignActive:(UIApplication *)application

@@ -23,6 +23,17 @@
 		B269D3ED171762A500723864 /* RTMasterViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EC171762A500723864 /* RTMasterViewController.m */; };
 		B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B269D3EF171762A500723864 /* RTDetailViewController.m */; };
 		B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */ = {isa = PBXBuildFile; fileRef = B269D3F6171769F300723864 /* bittorrent-logo-purple.png */; };
+		B2792D08172F1B3C004B6096 /* MediaPlayer.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2792D07172F1B3C004B6096 /* MediaPlayer.framework */; };
+		B2792D0D172F240D004B6096 /* FileViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2792D0A172F240D004B6096 /* FileViewController.m */; };
+		B2792D0E172F240D004B6096 /* Viewer.m in Sources */ = {isa = PBXBuildFile; fileRef = B2792D0C172F240D004B6096 /* Viewer.m */; };
+		B2B665DE172E4059007B0867 /* checkmark.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B665DC172E4059007B0867 /* checkmark.png */; };
+		B2B665DF172E4059007B0867 /* down-arrow-inv.png in Resources */ = {isa = PBXBuildFile; fileRef = B2B665DD172E4059007B0867 /* down-arrow-inv.png */; };
+		B2B665E9172EDD40007B0867 /* Dropbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665E8172EDD40007B0867 /* Dropbox.framework */; };
+		B2B665ED172EE103007B0867 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665EC172EE103007B0867 /* CFNetwork.framework */; };
+		B2B665EF172EE10D007B0867 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665EE172EE10D007B0867 /* Security.framework */; };
+		B2B665F1172EE117007B0867 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665F0172EE117007B0867 /* SystemConfiguration.framework */; };
+		B2B665F3172EE121007B0867 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665F2172EE121007B0867 /* QuartzCore.framework */; };
+		B2B665F5172EF141007B0867 /* QuickLook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B2B665F4172EF141007B0867 /* QuickLook.framework */; };
 		B2D24C4A1724CB8900B29EEA /* Settings.bundle in Resources */ = {isa = PBXBuildFile; fileRef = B2D24C491724CB8900B29EEA /* Settings.bundle */; };
 		B2F2A202171FBAB000E1EA08 /* RTAddTorrentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */; };
 		B2FB013617189011002B17D1 /* RTLoginController.m in Sources */ = {isa = PBXBuildFile; fileRef = B2FB013517189011002B17D1 /* RTLoginController.m */; };
@@ -53,6 +64,19 @@
 		B269D3F6171769F300723864 /* bittorrent-logo-purple.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "bittorrent-logo-purple.png"; sourceTree = "<group>"; };
 		B269D3F81718471B00723864 /* icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon.png; sourceTree = "<group>"; };
 		B269D3FA1718578800723864 /* icon2.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = icon2.png; sourceTree = "<group>"; };
+		B2792D07172F1B3C004B6096 /* MediaPlayer.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MediaPlayer.framework; path = System/Library/Frameworks/MediaPlayer.framework; sourceTree = SDKROOT; };
+		B2792D09172F240D004B6096 /* FileViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FileViewController.h; path = ../FileViewController.h; sourceTree = "<group>"; };
+		B2792D0A172F240D004B6096 /* FileViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FileViewController.m; path = ../FileViewController.m; sourceTree = "<group>"; };
+		B2792D0B172F240D004B6096 /* Viewer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = Viewer.h; path = ../Viewer.h; sourceTree = "<group>"; };
+		B2792D0C172F240D004B6096 /* Viewer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = Viewer.m; path = ../Viewer.m; sourceTree = "<group>"; };
+		B2B665DC172E4059007B0867 /* checkmark.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = checkmark.png; path = RemoteTorrent/checkmark.png; sourceTree = "<group>"; };
+		B2B665DD172E4059007B0867 /* down-arrow-inv.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "down-arrow-inv.png"; path = "RemoteTorrent/down-arrow-inv.png"; sourceTree = "<group>"; };
+		B2B665E8172EDD40007B0867 /* Dropbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Dropbox.framework; sourceTree = "<group>"; };
+		B2B665EC172EE103007B0867 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		B2B665EE172EE10D007B0867 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		B2B665F0172EE117007B0867 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		B2B665F2172EE121007B0867 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		B2B665F4172EF141007B0867 /* QuickLook.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuickLook.framework; path = System/Library/Frameworks/QuickLook.framework; sourceTree = SDKROOT; };
 		B2D24C491724CB8900B29EEA /* Settings.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = Settings.bundle; sourceTree = "<group>"; };
 		B2F2A200171FBAB000E1EA08 /* RTAddTorrentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RTAddTorrentViewController.h; sourceTree = "<group>"; };
 		B2F2A201171FBAB000E1EA08 /* RTAddTorrentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RTAddTorrentViewController.m; sourceTree = "<group>"; };
@@ -65,10 +89,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2792D08172F1B3C004B6096 /* MediaPlayer.framework in Frameworks */,
+				B2B665F5172EF141007B0867 /* QuickLook.framework in Frameworks */,
+				B2B665F3172EE121007B0867 /* QuartzCore.framework in Frameworks */,
+				B2B665F1172EE117007B0867 /* SystemConfiguration.framework in Frameworks */,
+				B2B665EF172EE10D007B0867 /* Security.framework in Frameworks */,
+				B2B665ED172EE103007B0867 /* CFNetwork.framework in Frameworks */,
 				B269D3CC171762A500723864 /* UIKit.framework in Frameworks */,
 				B269D3CE171762A500723864 /* Foundation.framework in Frameworks */,
 				B269D3D0171762A500723864 /* CoreGraphics.framework in Frameworks */,
 				B269D3D2171762A500723864 /* CoreData.framework in Frameworks */,
+				B2B665E9172EDD40007B0867 /* Dropbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -78,6 +109,8 @@
 		B269D3BF171762A500723864 = {
 			isa = PBXGroup;
 			children = (
+				B2B665DC172E4059007B0867 /* checkmark.png */,
+				B2B665DD172E4059007B0867 /* down-arrow-inv.png */,
 				B239C46B1718A6D400AE743E /* image.png */,
 				B269D3FA1718578800723864 /* icon2.png */,
 				B269D3F81718471B00723864 /* icon.png */,
@@ -98,6 +131,13 @@
 		B269D3CA171762A500723864 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2792D07172F1B3C004B6096 /* MediaPlayer.framework */,
+				B2B665F4172EF141007B0867 /* QuickLook.framework */,
+				B2B665F2172EE121007B0867 /* QuartzCore.framework */,
+				B2B665F0172EE117007B0867 /* SystemConfiguration.framework */,
+				B2B665EE172EE10D007B0867 /* Security.framework */,
+				B2B665EC172EE103007B0867 /* CFNetwork.framework */,
+				B2B665E8172EDD40007B0867 /* Dropbox.framework */,
 				B269D3CB171762A500723864 /* UIKit.framework */,
 				B269D3CD171762A500723864 /* Foundation.framework */,
 				B269D3CF171762A500723864 /* CoreGraphics.framework */,
@@ -109,6 +149,10 @@
 		B269D3D3171762A500723864 /* RemoteTorrent */ = {
 			isa = PBXGroup;
 			children = (
+				B2792D09172F240D004B6096 /* FileViewController.h */,
+				B2792D0A172F240D004B6096 /* FileViewController.m */,
+				B2792D0B172F240D004B6096 /* Viewer.h */,
+				B2792D0C172F240D004B6096 /* Viewer.m */,
 				B269D3F6171769F300723864 /* bittorrent-logo-purple.png */,
 				B269D3DC171762A500723864 /* RTAppDelegate.h */,
 				B269D3DD171762A500723864 /* RTAppDelegate.m */,
@@ -202,6 +246,8 @@
 				B269D3F7171769F300723864 /* bittorrent-logo-purple.png in Resources */,
 				B239C46C1718A6D400AE743E /* image.png in Resources */,
 				B2D24C4A1724CB8900B29EEA /* Settings.bundle in Resources */,
+				B2B665DE172E4059007B0867 /* checkmark.png in Resources */,
+				B2B665DF172E4059007B0867 /* down-arrow-inv.png in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -219,6 +265,8 @@
 				B269D3F0171762A500723864 /* RTDetailViewController.m in Sources */,
 				B2FB013617189011002B17D1 /* RTLoginController.m in Sources */,
 				B2F2A202171FBAB000E1EA08 /* RTAddTorrentViewController.m in Sources */,
+				B2792D0D172F240D004B6096 /* FileViewController.m in Sources */,
+				B2792D0E172F240D004B6096 /* Viewer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -303,9 +351,17 @@
 		B269D3F4171762A500723864 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RemoteTorrent/RemoteTorrent-Prefix.pch";
 				INFOPLIST_FILE = "RemoteTorrent/RemoteTorrent-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../DropboxTest/Dropbox.framework\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -314,9 +370,17 @@
 		B269D3F5171762A500723864 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)\"",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "RemoteTorrent/RemoteTorrent-Prefix.pch";
 				INFOPLIST_FILE = "RemoteTorrent/RemoteTorrent-Info.plist";
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"\"$(SRCROOT)/../DropboxTest/Dropbox.framework\"",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

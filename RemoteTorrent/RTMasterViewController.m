@@ -376,7 +376,7 @@ NSUserDefaults *defaults;
 
 - (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender
 {
-    if ([[segue identifier] isEqualToString:@"showTorrentDetail"])
+    if ([[segue identifier] isEqualToString:@"showTorrentDetails"])
     {
         //NSIndexPath *indexPath = [self.tableView indexPathForSelectedRow];
         
@@ -409,6 +409,26 @@ NSUserDefaults *defaults;
         });
         
     }
+    /*else if ([[segue identifier] isEqualToString:@"showCompletedFiles"])
+    {
+        // link to dropbox
+        DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"plux600vsa0m31f" secret:@"eezgie3mgcbs5oo"];
+        [DBAccountManager setSharedManager:accountMgr];
+        
+        // initialize view controller
+        //FileViewController *fvc = [FileViewController new];
+        
+        // see if there's a linked account
+        DBAccount *account = [accountMgr.linkedAccounts objectAtIndex:0];
+        if (account) { // if so
+            // pass the info to the view controller
+            DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
+            [[segue destinationViewController] initWithFilesystem:filesystem root:[DBPath root]];
+            //fvc = [[FileViewController alloc] initWithFilesystem:filesystem root:[DBPath root]];
+        }
+        /*else // otherwise initialize it empty
+            fvc = [FileViewController new];
+    }*/
 }
 
 
@@ -497,7 +517,7 @@ NSUserDefaults *defaults;
     else
     {
         //report error to user
-        UIAlertView* errorMessage = [[UIAlertView alloc] initWithTitle:@"Error: There Was A Problem Connecting" message:@"Please Try Again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
+        UIAlertView* errorMessage = [[UIAlertView alloc] initWithTitle:@"Error" message:@"There Was A Problem Connecting Please Try Again" delegate:self cancelButtonTitle:@"OK" otherButtonTitles:nil];
         [errorMessage show];
     }
     
