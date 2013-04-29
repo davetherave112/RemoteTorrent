@@ -347,30 +347,35 @@
                                 </connections>
                             </tableView>
                             <label opaque="NO" clipsSubviews="YES" userInteractionEnabled="NO" contentMode="left" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WiQ-og-PJL">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="300" id="0PA-bR-cdm"/>
+                                    <constraint firstAttribute="height" constant="33" id="Phu-rF-nfa"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" type="system" pointSize="18"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="centerX" secondItem="27" secondAttribute="centerX" type="default" id="9m6-dJ-LCU"/>
                             <constraint firstItem="acM-LE-3CW" firstAttribute="leading" secondItem="22" secondAttribute="leading" type="default" id="DDY-ni-xrD"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="leading" secondItem="22" secondAttribute="leading" type="default" id="DwW-FG-VMN"/>
-                            <constraint firstItem="WiQ-og-PJL" firstAttribute="top" secondItem="22" secondAttribute="top" constant="16" id="Ga2-p2-MFe"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="top" secondItem="22" secondAttribute="top" constant="20" symbolic="YES" type="default" id="FeQ-UK-mQs"/>
                             <constraint firstItem="acM-LE-3CW" firstAttribute="top" secondItem="22" secondAttribute="top" constant="374" id="Gyx-NN-mKD"/>
-                            <constraint firstItem="ZuI-ff-VZy" firstAttribute="trailing" secondItem="22" secondAttribute="trailing" type="default" id="Lb1-Ta-J1B"/>
                             <constraint firstItem="27" firstAttribute="top" secondItem="22" secondAttribute="top" constant="198" id="QZd-5g-Umc"/>
                             <constraint firstItem="27" firstAttribute="leading" secondItem="22" secondAttribute="leading" constant="20" symbolic="YES" type="default" id="R0m-z7-TWk"/>
-                            <constraint firstItem="acM-LE-3CW" firstAttribute="trailing" secondItem="22" secondAttribute="trailing" type="default" id="STj-Rh-sXj"/>
-                            <constraint firstItem="WiQ-og-PJL" firstAttribute="leading" secondItem="22" secondAttribute="leading" constant="141" id="YcN-Mp-7eD"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="centerX" secondItem="22" secondAttribute="centerX" type="default" id="WMF-jT-vsC"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="centerX" secondItem="acM-LE-3CW" secondAttribute="centerX" type="default" id="dhq-1b-mHy"/>
                             <constraint firstItem="ZuI-ff-VZy" firstAttribute="top" secondItem="22" secondAttribute="top" constant="197" id="fim-dC-HQr"/>
-                            <constraint firstAttribute="trailing" secondItem="27" secondAttribute="trailing" constant="20" symbolic="YES" type="default" id="pRe-qY-58T"/>
+                            <constraint firstItem="WiQ-og-PJL" firstAttribute="centerX" secondItem="ZuI-ff-VZy" secondAttribute="centerX" type="default" id="gHf-vX-ITc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Torrent Details" id="26"/>
                     <connections>
                         <outlet property="detailDescriptionLabel" destination="27" id="28"/>
                         <outlet property="tableView" destination="ZuI-ff-VZy" id="4sE-My-INI"/>
+                        <outlet property="torrentName" destination="WiQ-og-PJL" id="xu1-La-oOz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="23" sceneMemberID="firstResponder"/>

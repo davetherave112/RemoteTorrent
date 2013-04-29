@@ -384,6 +384,7 @@ NSUserDefaults *defaults;
         
         NSString* filesListURLString = [baseURLString stringByAppendingString:@"&action=getfiles&hash="];
         filesListURLString = [filesListURLString stringByAppendingString:[[torrentListArray objectAtIndex:indexPath.row] objectAtIndex:0]]; //HASH is at index 0
+        NSArray *torrentInfo = [torrentListArray objectAtIndex:indexPath.row];
         
         // Perform BitTorrent API search:
         dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
@@ -396,11 +397,13 @@ NSUserDefaults *defaults;
             
             dispatch_async(dispatch_get_main_queue(), ^{
                 
-                NSArray* fileListArray = [[fileListDictionary objectForKey:@"files"] objectAtIndex:1]; //Pull array of file list out (it's at index 1, index 0 is the HASH)
+                NSArray* fileListArray = [[fileListDictionary objectForKey:@"files"] objectAtIndex:1]; //Pull out array of file list (it's at index 1, index 0 is the HASH)
+                
+                NSArray *torrentDetailsArray = [NSArray arrayWithObjects: torrentInfo, fileListArray, nil];
                 
                 //NSManagedObject *object = [[self fetchedResultsController] objectAtIndexPath:indexPath];
                 
-                [[segue destinationViewController] setDetailItem:fileListArray];
+                [[segue destinationViewController] setDetailItem:torrentDetailsArray];
                 [(RTDetailViewController*)segue.destinationViewController configureView];
                 
                 
@@ -409,26 +412,6 @@ NSUserDefaults *defaults;
         });
         
     }
-    /*else if ([[segue identifier] isEqualToString:@"showCompletedFiles"])
-    {
-        // link to dropbox
-        DBAccountManager* accountMgr = [[DBAccountManager alloc] initWithAppKey:@"plux600vsa0m31f" secret:@"eezgie3mgcbs5oo"];
-        [DBAccountManager setSharedManager:accountMgr];
-        
-        // initialize view controller
-        //FileViewController *fvc = [FileViewController new];
-        
-        // see if there's a linked account
-        DBAccount *account = [accountMgr.linkedAccounts objectAtIndex:0];
-        if (account) { // if so
-            // pass the info to the view controller
-            DBFilesystem *filesystem = [[DBFilesystem alloc] initWithAccount:account];
-            [[segue destinationViewController] initWithFilesystem:filesystem root:[DBPath root]];
-            //fvc = [[FileViewController alloc] initWithFilesystem:filesystem root:[DBPath root]];
-        }
-        /*else // otherwise initialize it empty
-            fvc = [FileViewController new];
-    }*/
 }
 
 

@@ -14,7 +14,11 @@
 
 @implementation RTDetailViewController
 
+@synthesize torrentName;
+
+
 NSArray* fileList;
+NSArray* torrentInfo;
 
 #pragma mark - Managing the detail item
 
@@ -35,7 +39,9 @@ NSArray* fileList;
     if (self.detailItem) {
         //self.detailDescriptionLabel.text = [[self.detailItem valueForKey:@"timeStamp"] description];
         
-        fileList = self.detailItem;
+        torrentInfo = [self.detailItem objectAtIndex:0];
+        torrentName.text = [torrentInfo objectAtIndex:2];//NAME is at index 2
+        fileList = [self.detailItem objectAtIndex:1];
         
         [self.tableView reloadData];
 
