@@ -366,7 +366,7 @@ NSUserDefaults *defaults;
 -(void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
 {   
     
-    selectedTorrent = [torrentListArray objectAtIndex:[indexPath indexAtPosition:0]];
+    selectedTorrent = [torrentListArray objectAtIndex:indexPath.row];
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath
